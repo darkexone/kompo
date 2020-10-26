@@ -1,9 +1,12 @@
+package com.mycompany.sudoku;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import com.mycompany.sudoku.SudokuBoard;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,15 +32,42 @@ public class SudokuBoardTest {
         System.out.println("fillBoard");
         SudokuBoard instance = new SudokuBoard();
         instance.fixedStart();
-        instance.printSudoku();
+        //instance.printSudoku();
         
         boolean expResult = true;
         boolean result = instance.fillBoard();
-        instance.printSudoku();
+        //instance.printSudoku();
         assertEquals(expResult, result);
         
     }
-
+    
+    /**
+     * All rows,columns and boxes give equal sums
+     */
+    @org.junit.jupiter.api.Test
+    public void testEqualSum() {
+        System.out.println("equalSum");
+        SudokuBoard instance = new SudokuBoard();
+        instance.fixedStart();
+        //instance.printSudoku();
+        
+        int expResult = 405;
+        instance.fillBoard();
+       
+        
+        int sum=0;
+        
+        for (int i=0;i<9;i++){
+            for (int j=0; j<9;j++){
+                sum+=instance.getCell(j,i); 
+            }
+        }
+        
+        //instance.printSudoku();
+        assertEquals(expResult, sum);
+        
+    }
+    
     /**
      * Test of check method when false, of class SudokuBoard.
      */
@@ -73,7 +103,7 @@ public class SudokuBoardTest {
         assertEquals(expResult, result);
         
     }
-
+    
     /**
      * Test of randomStart method, of class SudokuBoard.
      */
@@ -96,5 +126,48 @@ public class SudokuBoardTest {
         
         assertEquals(expResult, check);
     }
+
+    /**
+     * Test of getCell method, of class SudokuBoard.
+     */
+    @org.junit.jupiter.api.Test
+    public void testGetCell() {
+        System.out.println("getCell");
+        SudokuBoard instance = new SudokuBoard();
+        instance.fixedStart();
+        
+        int check=instance.getCell(2, 1);
+        int expResult=3;
+        
+        
+        assertEquals(expResult, check);
+    }
     
+    /**
+     * Different boards test
+     */
+    @org.junit.jupiter.api.Test
+    public void testDifference() {
+        System.out.println("difference");
+        
+        SudokuBoard instance1 = new SudokuBoard();
+        instance1.randomStart();
+        
+        SudokuBoard instance2 = new SudokuBoard();
+        instance2.randomStart();
+        
+        boolean check = false;
+        boolean expResult = true;
+        
+        for(int i=0; i<9; i++){
+            for (int j=0; j<9; j++){
+                if (instance1.getCell(i,j)==instance2.getCell(i,j)){
+                    check=true;
+                    break;
+                }
+            }
+        }
+        assertEquals(expResult, check);
+        
+    }
 }
