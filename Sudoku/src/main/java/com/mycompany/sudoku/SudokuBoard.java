@@ -6,7 +6,7 @@ public class SudokuBoard {
     
     Random random = new Random();
     
-    private int[][] board = new int[9][9];
+    int[][] board = new int[9][9];
     
     public boolean fillBoard() {
     for (int row = 0;row < 9;row++) {
