@@ -11,7 +11,7 @@ class BacktrackingSudokuSolverTest {
         System.out.println("solve");
         BacktrackingSudokuSolver testSudokuSolver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
+        instance.randomStart();
 
         boolean expResult = true;
         boolean result = testSudokuSolver.solve(instance);
