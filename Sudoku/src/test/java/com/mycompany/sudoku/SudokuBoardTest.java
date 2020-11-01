@@ -23,21 +23,43 @@ public class SudokuBoardTest {
     public SudokuBoardTest() {
     }
 
+    public void fixedStart(SudokuBoard board) {
+        //zainicjowanie zerami
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                board.setCell(i,j,0);
+            }
+        }
+
+        board.setCell(2,1,3);
+        board.setCell(4,2,6);
+        board.setCell(0,0,8);
+    }
+
+    public void printSudoku(SudokuBoard board) {
+        for (int i = 0;i < 9;i++) {
+            for (int j = 0;j < 9;j++) {
+                System.out.print(board.getCell(i,j));
+            }
+            System.out.println("");
+        }
+    }
+
 
     /**
      * Test of fillBoard method, of class SudokuBoard.
      */
     @org.junit.jupiter.api.Test
-    public void testFillBoard() {
-        System.out.println("fillBoard");
+    public void testSolveGame() {
+        System.out.println("solveGame");
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
-        //instance.printSudoku();
-        
+        instance.randomStart();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         boolean expResult = true;
-        boolean result = instance.fillBoard();
-        //instance.printSudoku();
-        assertEquals(expResult, result);
+        boolean Result = instance.solveGame(solver);
+
+
+        assertEquals(expResult, Result);
         
     }
     
@@ -48,11 +70,12 @@ public class SudokuBoardTest {
     public void testEqualSum() {
         System.out.println("equalSum");
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
+        instance.randomStart();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         //instance.printSudoku();
         
         int expResult = 405;
-        instance.fillBoard();
+        instance.solveGame(solver);
        
         
         int sum=0;
@@ -78,7 +101,7 @@ public class SudokuBoardTest {
         int column = 0;
         int i = 0;
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
+        fixedStart(instance);
         
         boolean expResult = false;
         boolean result = instance.check(row, column, i);
@@ -96,7 +119,7 @@ public class SudokuBoardTest {
         int column = 0;
         int i = 1;
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
+        fixedStart(instance);
         
         boolean expResult = true;
         boolean result = instance.check(row, column, i);
@@ -134,9 +157,10 @@ public class SudokuBoardTest {
     public void testGetCell() {
         System.out.println("getCell");
         SudokuBoard instance = new SudokuBoard();
-        instance.fixedStart();
+        instance.randomStart();
+        instance.setCell(2,3,3);
         
-        int check=instance.getCell(2, 1);
+        int check=instance.getCell(2, 3);
         int expResult=3;
         
         
@@ -169,5 +193,15 @@ public class SudokuBoardTest {
         }
         assertEquals(expResult, check);
         
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void testSetCell() {
+        System.out.println("setCell");
+        SudokuBoard instance = new SudokuBoard();
+        instance.setCell(6,6,6);
+
+        assertEquals(instance.getCell(6,6), 6);
     }
 }
