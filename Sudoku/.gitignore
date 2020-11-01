@@ -1,4 +1,4 @@
 .idea/
 target/
-FirstJava.iml
+*.iml
 nbproject/
