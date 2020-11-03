@@ -10,7 +10,7 @@ class BacktrackingSudokuSolverTest {
     public void solve() {
         System.out.println("solve");
         BacktrackingSudokuSolver testSudokuSolver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard();
+        SudokuBoard instance = new SudokuBoard(testSudokuSolver);
         instance.randomStart();
 
         boolean expResult = true;

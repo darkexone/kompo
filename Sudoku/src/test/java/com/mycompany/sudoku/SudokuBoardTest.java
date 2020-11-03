@@ -52,9 +52,9 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     public void testSolveGame() {
         System.out.println("solveGame");
-        SudokuBoard instance = new SudokuBoard();
-        instance.randomStart();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
+        instance.randomStart();
         boolean expResult = true;
         boolean Result = instance.solveGame(solver);
 
@@ -69,9 +69,9 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     public void testEqualSum() {
         System.out.println("equalSum");
-        SudokuBoard instance = new SudokuBoard();
-        instance.randomStart();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
+        instance.randomStart();
         //instance.printSudoku();
         
         int expResult = 405;
@@ -100,7 +100,8 @@ public class SudokuBoardTest {
         int row = 0;
         int column = 0;
         int i = 0;
-        SudokuBoard instance = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
         fixedStart(instance);
         
         boolean expResult = false;
@@ -118,7 +119,8 @@ public class SudokuBoardTest {
         int row = 0;
         int column = 0;
         int i = 1;
-        SudokuBoard instance = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
         fixedStart(instance);
         
         boolean expResult = true;
@@ -133,7 +135,8 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     public void testRandomStart() {
         System.out.println("randomStart");
-        SudokuBoard instance = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
         instance.randomStart();
         
         boolean check=false;
@@ -156,7 +159,8 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     public void testGetCell() {
         System.out.println("getCell");
-        SudokuBoard instance = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
         instance.randomStart();
         instance.setCell(2,3,3);
         
@@ -173,11 +177,14 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     public void testDifference() {
         System.out.println("difference");
+
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
         
-        SudokuBoard instance1 = new SudokuBoard();
+        SudokuBoard instance1 = new SudokuBoard(solver1);
         instance1.randomStart();
         
-        SudokuBoard instance2 = new SudokuBoard();
+        SudokuBoard instance2 = new SudokuBoard(solver2);
         instance2.randomStart();
         
         boolean check = false;
@@ -199,7 +206,8 @@ public class SudokuBoardTest {
     @org.junit.jupiter.api.Test
     void testSetCell() {
         System.out.println("setCell");
-        SudokuBoard instance = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver);
         instance.setCell(6,6,6);
 
         assertEquals(instance.getCell(6,6), 6);

@@ -8,8 +8,9 @@ public class SudokuBoard {
     
     int[][] board = new int[9][9];
 
-    // TODO wstrzyknięcie SudokuSolver do SudokuBoard przez konstruktor
-    // SudokuSolver solver = new SudokuSolver();
+    SudokuBoard(SudokuSolver sudokuSolver) {
+         SudokuSolver solver = sudokuSolver;
+    }
 
 
     public boolean solveGame(BacktrackingSudokuSolver sudokuSolver) {
