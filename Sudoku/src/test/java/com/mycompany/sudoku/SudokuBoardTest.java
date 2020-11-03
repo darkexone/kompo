@@ -56,7 +56,7 @@ public class SudokuBoardTest {
         SudokuBoard instance = new SudokuBoard(solver);
         instance.randomStart();
         boolean expResult = true;
-        boolean Result = instance.solveGame(solver);
+        boolean Result = instance.solveGame();
 
 
         assertEquals(expResult, Result);
@@ -75,7 +75,7 @@ public class SudokuBoardTest {
         //instance.printSudoku();
         
         int expResult = 405;
-        instance.solveGame(solver);
+        instance.solveGame();
        
         
         int sum=0;

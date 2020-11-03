@@ -8,13 +8,14 @@ public class SudokuBoard {
     
     int[][] board = new int[9][9];
 
-    SudokuBoard(SudokuSolver sudokuSolver) {
-         SudokuSolver solver = sudokuSolver;
+    SudokuSolver solver;
+
+    public SudokuBoard(SudokuSolver sudokuSolver) {
+         solver = sudokuSolver;
     }
 
-
-    public boolean solveGame(BacktrackingSudokuSolver sudokuSolver) {
-        return sudokuSolver.solve(this);
+    public boolean solveGame() {
+        return solver.solve(this);
     }
     
     public boolean check(int row, int column, int i) {
