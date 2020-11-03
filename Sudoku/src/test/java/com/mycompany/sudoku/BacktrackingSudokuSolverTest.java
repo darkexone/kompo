@@ -1,7 +1,5 @@
 package com.mycompany.sudoku;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -10,7 +8,7 @@ class BacktrackingSudokuSolverTest {
     public void printSudoku(SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(board.getCell(i, j));
+                System.out.print(board.get(i, j));
             }
             System.out.println("");
         }

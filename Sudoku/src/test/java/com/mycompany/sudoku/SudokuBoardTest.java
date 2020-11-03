@@ -6,12 +6,6 @@ package com.mycompany.sudoku;
  * and open the template in the editor.
  */
 
-import com.mycompany.sudoku.SudokuBoard;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -27,19 +21,19 @@ public class SudokuBoardTest {
         //zainicjowanie zerami
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                board.setCell(i,j,0);
+                board.set(i,j,0);
             }
         }
 
-        board.setCell(2,1,3);
-        board.setCell(4,2,6);
-        board.setCell(0,0,8);
+        board.set(2,1,3);
+        board.set(4,2,6);
+        board.set(0,0,8);
     }
 
     public void printSudoku(SudokuBoard board) {
         for (int i = 0;i < 9;i++) {
             for (int j = 0;j < 9;j++) {
-                System.out.print(board.getCell(i,j));
+                System.out.print(board.get(i,j));
             }
             System.out.println("");
         }
@@ -82,7 +76,7 @@ public class SudokuBoardTest {
         
         for (int i=0;i<9;i++){
             for (int j=0; j<9;j++){
-                sum+=instance.getCell(j,i); 
+                sum+=instance.get(j,i);
             }
         }
         
@@ -143,7 +137,7 @@ public class SudokuBoardTest {
         boolean expResult=true;
         for(int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                if (instance.getCell(i,j)!=0){
+                if (instance.get(i,j)!=0){
                     check=true;
                     break;
                 }
@@ -162,9 +156,9 @@ public class SudokuBoardTest {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver);
         instance.randomStart();
-        instance.setCell(2,3,3);
+        instance.set(2,3,3);
         
-        int check=instance.getCell(2, 3);
+        int check=instance.get(2, 3);
         int expResult=3;
         
         
@@ -192,7 +186,7 @@ public class SudokuBoardTest {
         
         for(int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                if (instance1.getCell(i,j)==instance2.getCell(i,j)){
+                if (instance1.get(i,j)==instance2.get(i,j)){
                     check=true;
                     break;
                 }
@@ -208,8 +202,8 @@ public class SudokuBoardTest {
         System.out.println("setCell");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver);
-        instance.setCell(6,6,6);
+        instance.set(6,6,6);
 
-        assertEquals(instance.getCell(6,6), 6);
+        assertEquals(instance.get(6,6), 6);
     }
 }

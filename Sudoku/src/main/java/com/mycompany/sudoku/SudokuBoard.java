@@ -6,12 +6,20 @@ public class SudokuBoard {
     
     Random random = new Random();
     
-    int[][] board = new int[9][9];
+    //Object[][] board = new Object[9][9];
+
+    SudokuField[][] board = new SudokuField[9][9];
 
     SudokuSolver solver;
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
-         solver = sudokuSolver;
+        solver = sudokuSolver;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                board[i][j] = new SudokuField();
+            }
+        }
     }
 
     public boolean solveGame() {
@@ -22,14 +30,14 @@ public class SudokuBoard {
         
         //row
         for (int x = 0;x < 9;x++) {
-            if (board[x][row] == i) {
+            if (get(x,row) == i) {
                 return false;
             }
         }
         
         //column
         for (int y = 0;y < 9;y++) {
-            if (board[column][y] == i) {
+            if (get(column,y) == i) {
                 return false;
             }
         }
@@ -39,7 +47,7 @@ public class SudokuBoard {
         int kol = (column / 3) * 3;
         for (int m = rzad; m < rzad + 3; m++) {
             for (int n  = kol;n < kol + 3; n++) {
-                if (board[n][m] == i) {
+                if (get(n,m) == i) {
                     return false;
                 }
             }
@@ -49,14 +57,7 @@ public class SudokuBoard {
     }
     
     public void randomStart() {
-        
-        //zainicjowanie zerami
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                board[j][i] = 0;
-            }
-        }
-        
+
         //ustawianie losowych liczb w losowych komórkach
         for (int r = 0; r < 9; r++) {
             int rr = random.nextInt(9);
@@ -64,17 +65,17 @@ public class SudokuBoard {
             //board[rc][rr] = random.nextInt(9) + 1;
             int randomOdd = random.nextInt(9) + 1;
             if (check(rr, rc, randomOdd)) {
-                setCell(rc, rr, randomOdd);
+                set(rc, rr, randomOdd);
             }
         }
 }
     
-    public int getCell(int column, int row) {
-        return board[column][row];
+    public int get(int column, int row) {
+        return board[column][row].getFieldValue();
     }
 
-    public void setCell(int column, int row, int value) {
-        board[column][row] = value;
+    public void set(int column, int row, int value) {
+        board[column][row].setFieldValue(value);
     }
 }
 
