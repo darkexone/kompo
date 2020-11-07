@@ -77,6 +77,60 @@ public class SudokuBoard {
     public void set(int column, int row, int value) {
         board[column][row].setFieldValue(value);
     }
+
+    public SudokuRow getRow(int y) {
+
+        SudokuField [] rzad = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            rzad[i] = new SudokuField();
+            rzad[i].setFieldValue(board[i][y].getFieldValue());
+        }
+
+        SudokuRow sudokuRow = new SudokuRow(rzad);
+
+        return sudokuRow;
+    }
+
+    public SudokuColumn getColumn(int x) {
+
+        SudokuField [] kolumna = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            kolumna[i] = new SudokuField();
+        }
+
+        for (int i = 0; i < 9; i++) {
+            kolumna[i].setFieldValue(board[x][i].getFieldValue());
+        }
+
+        SudokuColumn sudokuColumn = new SudokuColumn(kolumna);
+
+        return sudokuColumn;
+    }
+
+    public SudokuBox getBox(int x, int y) {
+
+        SudokuField [] box = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+                box[i] = new SudokuField();
+            }
+
+        int rzad = (x / 3) * 3;
+        int kol = (y / 3) * 3;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                box[i+j].setFieldValue(board[i + rzad][j + kol].getFieldValue());
+            }
+        }
+
+        SudokuBox sudokuBox = new SudokuBox(box);
+
+        return sudokuBox;
+    }
+
 }
 
 
