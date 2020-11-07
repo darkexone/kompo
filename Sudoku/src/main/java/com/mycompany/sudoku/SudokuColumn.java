@@ -2,24 +2,31 @@ package com.mycompany.sudoku;
 
 public class SudokuColumn {
 
-    private SudokuField[] Column = new SudokuField[9];
+    private SudokuField[] column = new SudokuField[9];
 
-    public SudokuColumn(int y) {
-        for (int i=0;i<9;i++) {
-            Column[i]=field[y][i];
+    public SudokuColumn(SudokuField[] field) {
+
+        for (int i = 0; i < 9; i++) {
+            column[i] = new SudokuField();
+        }
+
+        for (int i = 0; i < 9; i++) {
+            column[i].setFieldValue(field[i].getFieldValue());
         }
     }
 
     public boolean verify() {
 
-
         //column
-        for (int y = 0;y < 9;y++) {
-            if (get(column,y) == i) {
-                return false;
-            }
+        int sum = 0;
+        for (int i = 0; i < 9; i++) {
+            sum += column[i].getFieldValue();
         }
 
-        return true;
+        if (sum != 45) {
+            return false;
+        }
+
+        return false;
     }
 }
