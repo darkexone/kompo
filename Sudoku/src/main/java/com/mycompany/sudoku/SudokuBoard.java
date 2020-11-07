@@ -10,7 +10,41 @@ public class SudokuBoard {
 
     private SudokuField[][] board = new SudokuField[9][9];
 
-    SudokuSolver solver;
+    public boolean isCheckBoardTrue() {
+        return checkBoard();
+    }
+
+    private SudokuSolver solver;
+
+    private boolean check(int row, int column, int i) {
+
+        //row
+        for (int x = 0;x < 9;x++) {
+            if (board[x][row].getFieldValue() == i) {
+                return false;
+            }
+        }
+
+        //column
+        for (int y = 0;y < 9;y++) {
+            if (board[column][y].getFieldValue() == i) {
+                return false;
+            }
+        }
+
+        //3x3
+        int rzad = (row / 3) * 3;
+        int kol = (column / 3) * 3;
+        for (int m = rzad; m < rzad + 3; m++) {
+            for (int n  = kol;n < kol + 3; n++) {
+                if (board[n][m].getFieldValue() == i) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
         solver = sudokuSolver;
@@ -24,36 +58,6 @@ public class SudokuBoard {
 
     public boolean solveGame() {
         return solver.solve(this);
-    }
-    
-    public boolean check(int row, int column, int i) {
-        
-        //row
-        for (int x = 0;x < 9;x++) {
-            if (get(x,row) == i) {
-                return false;
-            }
-        }
-        
-        //column
-        for (int y = 0;y < 9;y++) {
-            if (get(column,y) == i) {
-                return false;
-            }
-        }
-        
-        //3x3
-        int rzad = (row / 3) * 3;
-        int kol = (column / 3) * 3;
-        for (int m = rzad; m < rzad + 3; m++) {
-            for (int n  = kol;n < kol + 3; n++) {
-                if (get(n,m) == i) {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
     }
     
     private boolean checkBoard() {
