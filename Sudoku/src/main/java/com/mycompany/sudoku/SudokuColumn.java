@@ -27,6 +27,6 @@ public class SudokuColumn {
             return false;
         }
 
-        return false;
+        return true;
     }
 }

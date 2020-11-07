@@ -16,35 +16,7 @@ public class SudokuBoard {
 
     private SudokuSolver solver;
 
-    private boolean check(int row, int column, int i) {
-
-        //row
-        for (int x = 0;x < 9;x++) {
-            if (board[x][row].getFieldValue() == i) {
-                return false;
-            }
-        }
-
-        //column
-        for (int y = 0;y < 9;y++) {
-            if (board[column][y].getFieldValue() == i) {
-                return false;
-            }
-        }
-
-        //3x3
-        int rzad = (row / 3) * 3;
-        int kol = (column / 3) * 3;
-        for (int m = rzad; m < rzad + 3; m++) {
-            for (int n  = kol;n < kol + 3; n++) {
-                if (board[n][m].getFieldValue() == i) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
+    
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
         solver = sudokuSolver;
@@ -64,8 +36,18 @@ public class SudokuBoard {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (!(getRow(i).verify() || getColumn(j).verify() || getBox(i,j).verify())) {
-
+                if (!getRow(i).verify()) {
+                    //System.out.print(i);
+                    return false;
+                }
+                
+                if (!getColumn(j).verify()) {
+                    //System.out.print(j);
+                    return false;
+                }
+                
+                if (!getBox(i,j).verify()) {
+                    //System.out.print("Box" + i + " " +j );
                     return false;
                 }
             }
@@ -73,19 +55,7 @@ public class SudokuBoard {
         return true;
     }
 
-    public void randomStart() {
-
-        //ustawianie losowych liczb w losowych komórkach
-        for (int r = 0; r < 9; r++) {
-            int rr = random.nextInt(9);
-            int rc = random.nextInt(9);
-            //board[rc][rr] = random.nextInt(9) + 1;
-            int randomOdd = random.nextInt(9) + 1;
-            if (check(rr, rc, randomOdd)) {
-                set(rc, rr, randomOdd);
-            }
-        }
-}
+    
     
     public int get(int column, int row) {
         return board[column][row].getFieldValue();
@@ -139,9 +109,12 @@ public class SudokuBoard {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                box[i+j].setFieldValue(board[i + rzad][j + kol].getFieldValue());
+                box[ (3 * i) + j].setFieldValue(board[i + rzad][j + kol].getFieldValue());
             }
         }
+        //for(int i=0;i<9;i++) {
+        //    System.out.print(box[i]);
+        //}
 
         SudokuBox sudokuBox = new SudokuBox(box);
 

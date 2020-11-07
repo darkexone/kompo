@@ -31,6 +31,7 @@ public class SudokuBox {
         //}
 
         if (sum != 45) {
+            System.out.print(sum);
             return false;
         }
 
