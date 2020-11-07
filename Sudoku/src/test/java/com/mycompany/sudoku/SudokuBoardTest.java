@@ -99,7 +99,7 @@ public class SudokuBoardTest {
         fixedStart(instance);
         
         boolean expResult = false;
-        boolean result = instance.check(row, column, i);
+        boolean result = instance.isCheckBoardTrue();
         assertEquals(expResult, result);
         
     }
@@ -112,13 +112,14 @@ public class SudokuBoardTest {
         System.out.println("check_true");
         int row = 0;
         int column = 0;
-        int i = 1;
+
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver);
         fixedStart(instance);
+        instance.solveGame();
         
         boolean expResult = true;
-        boolean result = instance.check(row, column, i);
+        boolean result = instance.isCheckBoardTrue();
         assertEquals(expResult, result);
         
     }
