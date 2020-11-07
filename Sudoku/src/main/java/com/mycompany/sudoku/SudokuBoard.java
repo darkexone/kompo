@@ -56,6 +56,19 @@ public class SudokuBoard {
         return true;
     }
     
+    private boolean checkBoard() {
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (!(getRow(i).verify() || getColumn(j).verify() || getBox(i,j).verify())) {
+
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void randomStart() {
 
         //ustawianie losowych liczb w losowych komórkach
