@@ -8,7 +8,7 @@ public class SudokuBoard {
     
     //Object[][] board = new Object[9][9];
 
-    SudokuField[][] board = new SudokuField[9][9];
+    private SudokuField[][] board = new SudokuField[9][9];
 
     SudokuSolver solver;
 
