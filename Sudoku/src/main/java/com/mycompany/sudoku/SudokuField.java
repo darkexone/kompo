@@ -15,10 +15,11 @@ public class SudokuField extends Observable {
     }
 
     public void setFieldValue(int newValue) {
-        if (this.value != 0) {
+        //if (this.value != 0) {
+        
+        //}
+        value = newValue;
         setChanged();
         notifyObservers();
-        }
-        value = newValue;
     }
 }

@@ -17,16 +17,33 @@ public class SudokuRow {
 
     public boolean verify() {
 
-        //Row
+        //3x3
         int sum = 0;
+
+        int [] temp = new int[10];
+
+        for (int i : temp) {
+            temp[i] = 0;
+        }
+        
         for (int i = 0; i < 9; i++) {
-            sum += row[i].getFieldValue();
+                sum += row[i].getFieldValue();
+                temp[row[i].getFieldValue()]++;
+            }
+
+        for (int i = 1; i < 10; i++) {
+         if (temp[i] > 1) {
+           return false;
+         }
         }
 
-        if (sum == 45) {
-            return true;
-        } else {
-            return false;
-        }
+       
+        
+        //if (sum != 45) {
+        //    System.out.print(sum);
+        //   return false;
+        //}
+
+        return true;
     }
 }

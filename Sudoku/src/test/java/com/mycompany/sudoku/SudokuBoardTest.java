@@ -137,13 +137,16 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_row() {
-        System.out.println("check_false");
+        System.out.println("check_false_row");
         int row = 0;
         int column = 0;
         int i = 0;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
+        
+        instance.set(1,0,2);
+        instance.set(0,0,2);
         
         boolean expResult = false;   
         boolean result = instance.isCheckBoardTrue();
@@ -154,17 +157,20 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_Column() {
-        System.out.println("check_false");
+        System.out.println("check_false_column");
         int row = 0;
         int column = 0;
         int i = 0;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
-        for(int j =1; j<10;j++){
-            instance.set(i,0,j);
-            i++;
-        }
+        solver.solve(instance);
+        //for(int j =1; j<10;j++){
+        //    instance.set(i,0,j);
+         //   i++;
+        //}
+        
+        instance.set(0,8,instance.get(0, 0));
         
     
         
@@ -177,7 +183,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_Box() {
-        System.out.println("check_false");
+        System.out.println("check_false_box");
         int row = 0;
         int column = 0;
         int i = 0;
@@ -195,7 +201,7 @@ Random random = new Random();
             m++;
         }
         
-        instance.set(2,1,0);
+        instance.set(0,0,0);
     
     
     
@@ -220,7 +226,7 @@ Random random = new Random();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         instance.solveGame();
-        printSudoku(instance);
+        //printSudoku(instance);
         
         boolean expResult = true;
         boolean result = instance.isCheckBoardTrue();
@@ -336,6 +342,9 @@ Random random = new Random();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
 
+        instance.set(1,0,2);
+        instance.set(0,0,2);
+        
         boolean expResult = false;
         
         boolean result = instance.getBox(0, 0).verify();
@@ -351,7 +360,8 @@ Random random = new Random();
         fixedStart(instance);
         
         
-        instance.set(2,1,0);
+        instance.set(1,0,2);
+        instance.set(0,0,2);
         boolean expResult = false;
 
         assertEquals(instance.getRow(0).verify(), expResult);
@@ -379,7 +389,8 @@ Random random = new Random();
         fixedStart(instance);
         
         
-        instance.set(2,1,0);
+        instance.set(0,1,2);
+        instance.set(0,0,2);
         boolean expResult = false;
 
         assertEquals(instance.getColumn(0).verify(), expResult);
@@ -409,8 +420,11 @@ Random random = new Random();
         
         
         instance.set(0, 0, 2);
+        if(instance.isCheckBoardTrue()) System.out.println(1);
+        instance.set(1, 0, 2);
         
-        assertEquals(1,1);
+        
+        assertEquals(instance.isCheckBoardTrue(),false);
         
     }
     
@@ -425,8 +439,9 @@ Random random = new Random();
         
         
         instance.set(0, 0, instance.get(0, 0));
+        //instance.set(0,0,1);
         
-        assertEquals(1,1);
+        assertEquals(instance.isCheckBoardTrue(),true);
         
     }
 }

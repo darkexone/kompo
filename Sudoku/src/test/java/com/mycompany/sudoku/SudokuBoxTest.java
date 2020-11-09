@@ -43,7 +43,7 @@ class SudokuBoxTest {
     @org.junit.jupiter.api.Test
     public void testVerify_true() {
 
-        System.out.println("verify_false");
+        System.out.println("verify_true");
 
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);

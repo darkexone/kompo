@@ -23,7 +23,7 @@ public class SudokuBoard implements Observer {
     private SudokuSolver solver;
 
     public void update(Observable obj, Object arg) {
-       if (this.mode) {
+        if (this.mode) {
         if (this.checkBoard() == false) {
             System.out.println("Blad przy zmianie");
         }
