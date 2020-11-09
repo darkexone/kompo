@@ -14,7 +14,7 @@ class SudokuBoxTest {
         System.out.println("verify_false");
 
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         //fixedStart(instance);
 
         SudokuField [] rzad = new SudokuField[9];
@@ -46,7 +46,7 @@ class SudokuBoxTest {
         System.out.println("verify_false");
 
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         //fixedStart(instance);
 
         SudokuField [] rzad = new SudokuField[9];

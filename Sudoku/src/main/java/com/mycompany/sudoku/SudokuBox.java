@@ -11,6 +11,8 @@ public class SudokuBox {
             box[i].setFieldValue(field[i].getFieldValue());
             }
         }
+    
+    
 
     public boolean verify() {
 

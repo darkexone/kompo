@@ -94,7 +94,7 @@ Random random = new Random();
     public void testSolveGame() {
         System.out.println("solveGame");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
         boolean expResult = true;
         boolean Result = instance.solveGame();
@@ -111,7 +111,7 @@ Random random = new Random();
     public void testEqualSum() {
         System.out.println("equalSum");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
         //instance.printSudoku();
         
@@ -142,7 +142,7 @@ Random random = new Random();
         int column = 0;
         int i = 0;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         
         boolean expResult = false;   
@@ -159,7 +159,7 @@ Random random = new Random();
         int column = 0;
         int i = 0;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         for(int j =1; j<10;j++){
             instance.set(i,0,j);
@@ -183,7 +183,7 @@ Random random = new Random();
         int i = 0;
         int m = 0 ;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         for(int j =1; j<10;j++){
             instance.set(i,0,j);
@@ -217,7 +217,7 @@ Random random = new Random();
         int column = 0;
 
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         instance.solveGame();
         printSudoku(instance);
@@ -236,7 +236,7 @@ Random random = new Random();
     public void testRandomStart() {
         System.out.println("randomStart");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         instance.randomStart();
         
         boolean check=false;
@@ -261,7 +261,7 @@ Random random = new Random();
     public void testGet() {
         System.out.println("getCell");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
         instance.set(2,3,3);
         
@@ -282,10 +282,10 @@ Random random = new Random();
         BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
         
-        SudokuBoard instance1 = new SudokuBoard(solver1);
+        SudokuBoard instance1 = new SudokuBoard(solver1,false);
         randomStart(instance1);
         
-        SudokuBoard instance2 = new SudokuBoard(solver2);
+        SudokuBoard instance2 = new SudokuBoard(solver2,false);
         randomStart(instance2);
         
         boolean check = false;
@@ -308,7 +308,7 @@ Random random = new Random();
     void testSet() {
         System.out.println("setCell");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         instance.set(6,6,6);
 
         assertEquals(instance.get(6,6), 6);
@@ -318,7 +318,7 @@ Random random = new Random();
     void testGetBox_true() {
         System.out.println("getBox_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         instance.solveGame();
         
@@ -333,7 +333,7 @@ Random random = new Random();
     void testGetBox_false() {
         System.out.println("getBox_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
 
         boolean expResult = false;
@@ -347,7 +347,7 @@ Random random = new Random();
     void testGetRow_false() {
         System.out.println("getRow_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         
         
@@ -361,7 +361,7 @@ Random random = new Random();
     void testGetRow_true() {
         System.out.println("getRow_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         instance.solveGame();
         
@@ -375,7 +375,7 @@ Random random = new Random();
     void testGetColumn_false() {
         System.out.println("getColumn_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         
         
@@ -389,7 +389,7 @@ Random random = new Random();
     void testGetColumn_true() {
         System.out.println("getColumn_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
         instance.solveGame();
         
@@ -397,5 +397,36 @@ Random random = new Random();
         boolean expResult = true;
 
         assertEquals(instance.getColumn(0).verify(), expResult);
+    }
+    
+     @org.junit.jupiter.api.Test
+    public void testUpdate_false() {
+        System.out.println("update_false");
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver,true);
+        fixedStart(instance);
+        
+        
+        
+        instance.set(0, 0, 2);
+        
+        assertEquals(1,1);
+        
+    }
+    
+    @org.junit.jupiter.api.Test
+    public void testUpdate_true() {
+        System.out.println("update_true");
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard instance = new SudokuBoard(solver,true);
+        fixedStart(instance);
+        solver.solve(instance);
+        
+        
+        
+        instance.set(0, 0, instance.get(0, 0));
+        
+        assertEquals(1,1);
+        
     }
 }

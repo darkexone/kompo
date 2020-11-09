@@ -1,14 +1,20 @@
 package com.mycompany.sudoku;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
-public class SudokuBoard {
+
+
+public class SudokuBoard implements Observer {
     
     Random random = new Random();
     
     //Object[][] board = new Object[9][9];
 
     private SudokuField[][] board = new SudokuField[9][9];
+    
+    public boolean mode = false;
 
     public boolean isCheckBoardTrue() {
         return checkBoard();
@@ -16,14 +22,22 @@ public class SudokuBoard {
 
     private SudokuSolver solver;
 
-    
+    public void update(Observable obj, Object arg) {
+       if (this.mode) {
+        if (this.checkBoard() == false) {
+            System.out.println("Blad przy zmianie");
+        }
+       }
+    }
 
-    public SudokuBoard(SudokuSolver sudokuSolver) {
+    public SudokuBoard(SudokuSolver sudokuSolver, boolean mode) {
         solver = sudokuSolver;
-
+        this.mode = mode;
+        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 board[i][j] = new SudokuField();
+                board[i][j].addObserver(this);
             }
         }
     }

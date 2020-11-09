@@ -80,7 +80,7 @@ class BacktrackingSudokuSolverTest {
 
         System.out.println("solve");
         BacktrackingSudokuSolver testSudokuSolver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(testSudokuSolver);
+        SudokuBoard instance = new SudokuBoard(testSudokuSolver,false);
         System.out.println("przed rozwiazaniem:");
         printSudoku(instance);
         //SudokuField field1 = new SudokuField();

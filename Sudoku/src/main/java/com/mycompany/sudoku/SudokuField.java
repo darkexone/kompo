@@ -1,8 +1,10 @@
 package com.mycompany.sudoku;
 
-public class SudokuField {
+import java.util.Observable;
 
-    public int value;
+public class SudokuField extends Observable {
+
+    private int value;
 
     public SudokuField() {
         value = 0;
@@ -13,6 +15,10 @@ public class SudokuField {
     }
 
     public void setFieldValue(int newValue) {
+        if (this.value != 0) {
+        setChanged();
+        notifyObservers();
+        }
         value = newValue;
     }
 }

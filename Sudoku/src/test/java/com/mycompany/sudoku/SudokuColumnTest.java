@@ -27,7 +27,7 @@ public class SudokuColumnTest {
     public void testVerify_false() {
         System.out.println("verify_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         //fixedStart(instance);
 
         SudokuField [] rzad = new SudokuField[9];
@@ -58,7 +58,7 @@ public class SudokuColumnTest {
         System.out.println("verify_false");
 
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard instance = new SudokuBoard(solver);
+        SudokuBoard instance = new SudokuBoard(solver,false);
         //fixedStart(instance);
 
         SudokuField [] rzad = new SudokuField[9];
