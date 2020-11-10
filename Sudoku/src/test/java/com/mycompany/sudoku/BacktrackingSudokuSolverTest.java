@@ -82,18 +82,18 @@ class BacktrackingSudokuSolverTest {
         BacktrackingSudokuSolver testSudokuSolver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(testSudokuSolver,false);
         System.out.println("przed rozwiazaniem:");
-        printSudoku(instance);
+        //printSudoku(instance);
         //SudokuField field1 = new SudokuField();
         //System.out.println(field1.getFieldValue());
         //System.out.println(instance.board[0][0].getFieldValue());
         randomStart(instance);
         //fixedStart(instance);
         System.out.println("po random starcie:");
-        printSudoku(instance);
+        //printSudoku(instance);
         boolean expResult = true;
         boolean result = testSudokuSolver.solve(instance);
         System.out.println("po rozwiazaniu:");
-        printSudoku(instance);
+        //printSudoku(instance);
         assertEquals(expResult, result);
 
     }

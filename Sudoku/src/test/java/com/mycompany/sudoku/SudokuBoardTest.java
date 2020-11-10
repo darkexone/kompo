@@ -84,6 +84,7 @@ Random random = new Random();
             }
             System.out.println("");
         }
+        //System.out.println("kolumny: " + board.board.size() + "\nwiersze: " + board.board.get(0).size());
     }
 
 
@@ -99,7 +100,7 @@ Random random = new Random();
         boolean expResult = true;
         boolean Result = instance.solveGame();
 
-
+        printSudoku(instance);
         assertEquals(expResult, Result);
         
     }
