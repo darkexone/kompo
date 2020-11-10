@@ -424,7 +424,7 @@ Random random = new Random();
         instance.set(1, 0, 2);
         
         
-        assertEquals(instance.isCheckBoardTrue(),false);
+        assertEquals(instance.isUpdate,true);
         
     }
     
@@ -441,7 +441,7 @@ Random random = new Random();
         instance.set(0, 0, instance.get(0, 0));
         //instance.set(0,0,1);
         
-        assertEquals(instance.isCheckBoardTrue(),true);
+        assertEquals(instance.isUpdate,false);
         
     }
 }
