@@ -1,22 +1,33 @@
 package com.mycompany.sudoku;
 
+//import java.lang.reflect.Array;
+//import java.util.Arrays;
+//import java.util.Arrays;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
+//import static java.util.ArrayList.*;
+//import static java.util.Arrays.asList;
 
 
 public class SudokuBoard implements Observer {
     
     Random random = new Random();
-    
-    //Object[][] board = new Object[9][9];
 
-    private SudokuField[][] board = new SudokuField[9][9];
+    //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
+    private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
+
+    //List<String> fixedSizeList = asList(new String[100]);
+    //private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>();
+
+    //private SudokuField[][] board = new SudokuField[9][9];
 
     public boolean isUpdate = false;
     
-    public boolean mode = false;
+    public boolean mode;
 
     public boolean isCheckBoardTrue() {
         return checkBoard();
@@ -33,14 +44,18 @@ public class SudokuBoard implements Observer {
        }
     }
 
+    // private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>(9);
+
     public SudokuBoard(SudokuSolver sudokuSolver, boolean mode) {
         solver = sudokuSolver;
         this.mode = mode;
-        
+
         for (int i = 0; i < 9; i++) {
+            board.add(new SudokuArrayList<>());
             for (int j = 0; j < 9; j++) {
-                board[i][j] = new SudokuField();
-                board[i][j].addObserver(this);
+                board.get(i).add(new SudokuField());
+
+                board.get(i).get(j).addObserver(this);
             }
         }
     }
@@ -75,11 +90,11 @@ public class SudokuBoard implements Observer {
     
     
     public int get(int column, int row) {
-        return board[column][row].getFieldValue();
+        return board.get(column).get(row).getFieldValue();
     }
 
     public void set(int column, int row, int value) {
-        board[column][row].setFieldValue(value);
+        board.get(column).get(row).setFieldValue(value);
     }
 
     public SudokuRow getRow(int y) {
@@ -88,7 +103,7 @@ public class SudokuBoard implements Observer {
 
         for (int i = 0; i < 9; i++) {
             rzad[i] = new SudokuField();
-            rzad[i].setFieldValue(board[i][y].getFieldValue());
+            rzad[i].setFieldValue(board.get(i).get(y).getFieldValue());
         }
 
         SudokuRow sudokuRow = new SudokuRow(rzad);
@@ -105,7 +120,7 @@ public class SudokuBoard implements Observer {
         }
 
         for (int i = 0; i < 9; i++) {
-            kolumna[i].setFieldValue(board[x][i].getFieldValue());
+            kolumna[i].setFieldValue(board.get(x).get(i).getFieldValue());
         }
 
         SudokuColumn sudokuColumn = new SudokuColumn(kolumna);
@@ -118,15 +133,15 @@ public class SudokuBoard implements Observer {
         SudokuField [] box = new SudokuField[9];
 
         for (int i = 0; i < 9; i++) {
-                box[i] = new SudokuField();
-            }
+            box[i] = new SudokuField();
+        }
 
         int rzad = (x / 3) * 3;
         int kol = (y / 3) * 3;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                box[ (3 * i) + j].setFieldValue(board[i + rzad][j + kol].getFieldValue());
+                box[ (3 * i) + j].setFieldValue(board.get(i + rzad).get(j + kol).getFieldValue());
             }
         }
         //for(int i=0;i<9;i++) {
@@ -139,5 +154,3 @@ public class SudokuBoard implements Observer {
     }
 
 }
-
-
