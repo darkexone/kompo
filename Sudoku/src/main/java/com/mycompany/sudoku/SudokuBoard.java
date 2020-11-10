@@ -13,6 +13,8 @@ public class SudokuBoard implements Observer {
     //Object[][] board = new Object[9][9];
 
     private SudokuField[][] board = new SudokuField[9][9];
+
+    public boolean isUpdate = false;
     
     public boolean mode = false;
 
@@ -26,6 +28,7 @@ public class SudokuBoard implements Observer {
         if (this.mode) {
         if (this.checkBoard() == false) {
             System.out.println("Blad przy zmianie");
+            isUpdate = true;
         }
        }
     }
