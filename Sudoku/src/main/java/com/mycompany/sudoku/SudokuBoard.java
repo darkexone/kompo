@@ -50,15 +50,12 @@ public class SudokuBoard implements Observer {
         solver = sudokuSolver;
         this.mode = mode;
 
-        for (int i = 0; i < 9; i++) {
-            board.add(new SudokuArrayList<>());
-            for (int j = 0; j < 9; j++) {
-                board.get(i).add(new SudokuField());
-
-                board.get(i).get(j).addObserver(this);
+            for (int i = 0; i < 81; i++) {
+                this.board.set(i, new SudokuField());
+                this.board.get(i).addObserver(this);
             }
         }
-    }
+
 
     public boolean solveGame() {
         return solver.solve(this);
@@ -90,11 +87,11 @@ public class SudokuBoard implements Observer {
     
     
     public int get(int column, int row) {
-        return board.get(column).get(row).getFieldValue();
+        return board.get((row * 9) + column).getFieldValue();
     }
 
     public void set(int column, int row, int value) {
-        board.get(column).get(row).setFieldValue(value);
+        board.get((row * 9) + column).setFieldValue(value);
     }
 
     public SudokuRow getRow(int y) {
@@ -103,7 +100,7 @@ public class SudokuBoard implements Observer {
 
         for (int i = 0; i < 9; i++) {
             rzad[i] = new SudokuField();
-            rzad[i].setFieldValue(board.get(i).get(y).getFieldValue());
+            rzad[i].setFieldValue(board.get(i + (y * 9)).getFieldValue());
         }
 
         SudokuRow sudokuRow = new SudokuRow(rzad);
@@ -117,10 +114,7 @@ public class SudokuBoard implements Observer {
 
         for (int i = 0; i < 9; i++) {
             kolumna[i] = new SudokuField();
-        }
-
-        for (int i = 0; i < 9; i++) {
-            kolumna[i].setFieldValue(board.get(x).get(i).getFieldValue());
+            kolumna[i].setFieldValue(board.get((i * 9) + x).getFieldValue());
         }
 
         SudokuColumn sudokuColumn = new SudokuColumn(kolumna);
@@ -141,7 +135,7 @@ public class SudokuBoard implements Observer {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                box[ (3 * i) + j].setFieldValue(board.get(i + rzad).get(j + kol).getFieldValue());
+                box[ (3 * i) + j].setFieldValue(board.get((9 * i) + j).getFieldValue());
             }
         }
         //for(int i=0;i<9;i++) {
