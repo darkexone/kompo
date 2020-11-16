@@ -1,24 +1,16 @@
 package com.mycompany.sudoku;
 
-//import java.lang.reflect.Array;
-//import java.util.Arrays;
-//import java.util.Arrays;
-//import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-//import static java.util.ArrayList.*;
-//import static java.util.Arrays.asList;
-
 
 public class SudokuBoard implements Observer {
     
     Random random = new Random();
 
-    //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
     private final List<SudokuField> board = Arrays.asList(new SudokuField[81]);
 
     public boolean isUpdate = false;
@@ -39,8 +31,6 @@ public class SudokuBoard implements Observer {
         }
        }
     }
-
-    // private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>(9);
 
     public SudokuBoard(SudokuSolver sudokuSolver, boolean mode) {
         solver = sudokuSolver;
