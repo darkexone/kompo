@@ -78,11 +78,12 @@ Random random = new Random();
     }
 
     public void printSudoku(SudokuBoard board) {
-        for (int i = 0;i < 9;i++) {
-            for (int j = 0;j < 9;j++) {
-                System.out.print(board.get(i,j));
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(board.get(j, i));
             }
-            System.out.println("");
+            System.out.println();
         }
         //System.out.println("kolumny: " + board.board.size() + "\nwiersze: " + board.board.get(0).size());
     }
