@@ -18,7 +18,7 @@ public class SudokuBoard implements Observer {
     Random random = new Random();
 
     //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
-    private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
+    private final List<SudokuField> board = Arrays.asList(new SudokuField[81]);
 
     //List<String> fixedSizeList = asList(new String[100]);
     //private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>();
