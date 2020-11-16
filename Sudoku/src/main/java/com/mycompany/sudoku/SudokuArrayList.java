@@ -1,7 +1,6 @@
 package com.mycompany.sudoku;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class SudokuArrayList<OBJECT> extends ArrayList<OBJECT> {
     // "Object" nie przechodzi JaCoCo
