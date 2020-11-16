@@ -4,7 +4,8 @@ package com.mycompany.sudoku;
 //import java.util.Arrays;
 //import java.util.Arrays;
 //import java.util.ArrayList;
-//import java.util.List;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -20,14 +21,9 @@ public class SudokuBoard implements Observer {
     //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
     private final List<SudokuField> board = Arrays.asList(new SudokuField[81]);
 
-    //List<String> fixedSizeList = asList(new String[100]);
-    //private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>();
-
-    //private SudokuField[][] board = new SudokuField[9][9];
-
     public boolean isUpdate = false;
     
-    public boolean mode;
+    private boolean mode;
 
     public boolean isCheckBoardTrue() {
         return checkBoard();
@@ -84,8 +80,6 @@ public class SudokuBoard implements Observer {
         return true;
     }
 
-    
-    
     public int get(int column, int row) {
         return board.get((row * 9) + column).getFieldValue();
     }
