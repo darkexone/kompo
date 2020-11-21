@@ -50,14 +50,16 @@ public class SudokuBoard implements Observer {
         solver = sudokuSolver;
         this.mode = mode;
 
+
         for (int i = 0; i < 9; i++) {
             board.add(new SudokuArrayList<>());
             for (int j = 0; j < 9; j++) {
                 board.get(i).add(new SudokuField());
-
                 board.get(i).get(j).addObserver(this);
             }
         }
+        System.out.println("rozmiar board: " + board.size());
+        System.out.println("rozmiar board.get(0): " + board.get(0).size());
     }
 
     public boolean solveGame() {
