@@ -67,5 +67,59 @@ public class SudokuColumnTest {
         assertEquals(expResult, result);
 
     }
-    
+
+    @org.junit.jupiter.api.Test
+    public void testHashCode() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
+        assertNotEquals(column1.hashCode(), column2.hashCode());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testToString() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+        }
+        SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
+
+        assertEquals(column1.toString(), column2.toString());
+
+        field1[0].setFieldValue(2);
+        SudokuColumn column3 = new SudokuColumn(field1);
+        assertNotEquals(column1.toString(), column3.toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testEquals() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
+        SudokuBox box1 = new SudokuBox(field1);
+
+        assertFalse(column1.equals(null));
+        assertTrue(column1.equals(column1));
+        assertFalse(column1.equals(column2));
+        assertFalse(column1.equals(box1));
+    }
 }

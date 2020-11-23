@@ -445,4 +445,34 @@ Random random = new Random();
         assertEquals(instance.isUpdate,false);
         
     }
+
+    @org.junit.jupiter.api.Test
+    public void testHashCode() {
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+        SudokuBoard board1 = new SudokuBoard(solver1,false);
+        SudokuBoard board2 = new SudokuBoard(solver2,false);
+        assertNotEquals(board1.hashCode(), board2.hashCode());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testToString(){
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+        SudokuBoard board1 = new SudokuBoard(solver1,false);
+        SudokuBoard board2 = new SudokuBoard(solver2,false);
+        assertNotEquals(board1.toString(), board2.toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testEquals(){
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+        SudokuBoard board1 = new SudokuBoard(solver1,false);
+        SudokuBoard board2 = new SudokuBoard(solver2,false);
+        assertFalse(board1.equals(null));
+        assertFalse(board1.equals(board1.getColumn(1)));
+        assertTrue(board1.equals(board1));
+        assertFalse(board1.equals(board2));
+    }
 }

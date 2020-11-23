@@ -57,4 +57,58 @@ class SudokuBoxTest {
 
     }
 
+    @org.junit.jupiter.api.Test
+    public void testHashCode() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        assertNotEquals(box1.hashCode(), box2.hashCode());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testToString() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+        }
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        assertEquals(box1.toString(), box2.toString());
+
+        field1[0].setFieldValue(2);
+        SudokuBox box3 = new SudokuBox(field1);
+        assertNotEquals(box1.toString(), box3.toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testEquals() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        SudokuColumn column1 = new SudokuColumn(field1);
+
+        assertFalse(box1.equals(null));
+        assertTrue(box1.equals(box1));
+        assertFalse(box1.equals(box2));
+        assertFalse(box1.equals(column1));
+    }
+
 }

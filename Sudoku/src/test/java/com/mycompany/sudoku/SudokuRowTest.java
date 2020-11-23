@@ -67,4 +67,61 @@ public class SudokuRowTest {
         assertEquals(expResult, result);
 
     }
+
+    @org.junit.jupiter.api.Test
+    public void testHashCode() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field2);
+        assertNotEquals(row1.hashCode(), row2.hashCode());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testToString() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field1);
+
+        assertEquals(row1.toString(), row2.toString());
+        field1[0].setFieldValue(2);
+        SudokuRow row3 = new SudokuRow(field2);
+        assertNotEquals(row1.toString(), row3.toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testEquals() {
+        SudokuField [] field1 = new SudokuField[9];
+        SudokuField [] field2 = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field2[i] = new SudokuField();
+
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field2);
+        SudokuColumn column1 = new SudokuColumn(field1);
+
+        assertFalse(row1.equals(null));
+        assertTrue(row1.equals(row1));
+        assertFalse(row1.equals(row2));
+        assertFalse(row1.equals(column1));
+    }
 }
