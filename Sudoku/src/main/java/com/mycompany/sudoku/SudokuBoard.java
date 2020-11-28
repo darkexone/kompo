@@ -8,6 +8,9 @@ package com.mycompany.sudoku;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.junit.platform.commons.util.ToStringBuilder;
 
 //import static java.util.ArrayList.*;
 //import static java.util.Arrays.asList;
@@ -19,6 +22,7 @@ public class SudokuBoard implements Observer {
 
     //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
     private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
+    private SudokuArrayList<SudokuArrayList<SudokuField>> board2 = new SudokuArrayList<>();
 
     //List<String> fixedSizeList = asList(new String[100]);
     //private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>();
@@ -50,14 +54,16 @@ public class SudokuBoard implements Observer {
         solver = sudokuSolver;
         this.mode = mode;
 
+
         for (int i = 0; i < 9; i++) {
             board.add(new SudokuArrayList<>());
             for (int j = 0; j < 9; j++) {
                 board.get(i).add(new SudokuField());
-
                 board.get(i).get(j).addObserver(this);
             }
         }
+        System.out.println("rozmiar board: " + board.size());
+        System.out.println("rozmiar board.get(0): " + board.get(0).size());
     }
 
     public boolean solveGame() {
@@ -151,6 +157,43 @@ public class SudokuBoard implements Observer {
         SudokuBox sudokuBox = new SudokuBox(box);
 
         return sudokuBox;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("SudokuSolver", solver)
+                .append("ArrayListBoard", board)
+                .toString();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        SudokuBoard rhs = (SudokuBoard) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(solver, rhs.solver)
+                .append(board, rhs.board)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(solver)
+                .append(board)
+                .toHashCode();
     }
 
 }

@@ -28,10 +28,20 @@
     </executions>
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
             <version>8.36</version>
         </dependency>
+         <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>12.0.1</version>
+    </dependency>
     </dependencies>
 </plugin>
 
@@ -80,6 +90,15 @@
     <artifactId>maven-site-plugin</artifactId>
     <version>3.8.2</version>
 </plugin>
+
+<plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.4</version>
+        <configuration>
+          <mainClass>Main</mainClass>
+        </configuration>
+      </plugin>
 
                <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -151,6 +170,29 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.6.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>13</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>13</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>

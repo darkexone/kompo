@@ -1,5 +1,9 @@
 package com.mycompany.sudoku;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.junit.platform.commons.util.ToStringBuilder;
+
 public class SudokuColumn {
 
     private SudokuField[] column = new SudokuField[9];
@@ -45,5 +49,39 @@ public class SudokuColumn {
         //}
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("column", column)
+                .toString();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        SudokuColumn rhs = (SudokuColumn) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(column, rhs.column)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(column)
+                .toHashCode();
     }
 }

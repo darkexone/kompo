@@ -1,6 +1,9 @@
 package com.mycompany.sudoku;
 
 import java.util.Observable;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.junit.platform.commons.util.ToStringBuilder;
 
 public class SudokuField extends Observable {
 
@@ -21,5 +24,39 @@ public class SudokuField extends Observable {
         value = newValue;
         setChanged();
         notifyObservers();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("SudokuField", value)
+                .toString();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        SudokuField rhs = (SudokuField) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(value, rhs.value)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(value)
+                .toHashCode();
     }
 }
