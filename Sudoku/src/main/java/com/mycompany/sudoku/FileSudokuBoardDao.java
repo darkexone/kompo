@@ -51,21 +51,38 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoardInstance) {
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("filename ", filename)
+                .append("asbolutePath ", absolutePath)
+                .toString();
+    }
 
-        try (FileWriter fileWriter = new FileWriter(absolutePath)) {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    fileWriter.write(sudokuBoardInstance.get(i,j));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
         }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        FileSudokuBoardDao rhs = (FileSudokuBoardDao) obj;
+        return new EqualsBuilder()
+                .append(filename, rhs.filename)
+                .append(absolutePath, rhs.absolutePath)
+                .isEquals();
     }
 
     @Override
-    public void finalize() throws Throwable {
-        super.finalize(); //TODO ZAPYTAC NA KONSULTACJACH
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(filename)
+                .append(absolutePath)
+                .toHashCode();
     }
 }
