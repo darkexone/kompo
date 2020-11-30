@@ -72,7 +72,6 @@ public class SudokuBox {
 
         SudokuBox rhs = (SudokuBox) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(box, rhs.box)
                 .isEquals();
     }

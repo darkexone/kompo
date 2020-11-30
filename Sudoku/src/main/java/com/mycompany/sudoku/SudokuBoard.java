@@ -182,7 +182,6 @@ public class SudokuBoard implements Observer {
 
         SudokuBoard rhs = (SudokuBoard) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(solver, rhs.solver)
                 .append(board, rhs.board)
                 .isEquals();

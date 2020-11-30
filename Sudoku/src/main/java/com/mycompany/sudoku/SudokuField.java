@@ -48,7 +48,6 @@ public class SudokuField extends Observable {
 
         SudokuField rhs = (SudokuField) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(value, rhs.value)
                 .isEquals();
     }
