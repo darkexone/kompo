@@ -5,6 +5,7 @@ package com.mycompany.sudoku;
 //import java.util.Arrays;
 //import java.util.ArrayList;
 //import java.util.List;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -16,13 +17,13 @@ import org.junit.platform.commons.util.ToStringBuilder;
 //import static java.util.Arrays.asList;
 
 
-public class SudokuBoard implements Observer {
+public class SudokuBoard implements Observer, Serializable {
     
     Random random = new Random();
 
     //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
     private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
-    private SudokuArrayList<SudokuArrayList<SudokuField>> board2 = new SudokuArrayList<>();
+    //private SudokuArrayList<SudokuArrayList<SudokuField>> board2 = new SudokuArrayList<>();
 
     //List<String> fixedSizeList = asList(new String[100]);
     //private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>();
