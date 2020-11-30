@@ -2,8 +2,8 @@ package com.mycompany.sudoku;
 
 public interface Dao<T> {
 
-    public T read();
+    public T read() throws Throwable;
 
-    public void write(T obj);
+    public void write(T obj) throws Throwable;
 
 }
