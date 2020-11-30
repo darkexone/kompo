@@ -3,6 +3,7 @@ package com.mycompany.sudoku;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -21,7 +22,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public SudokuBoard read() throws Throwable {
+    public SudokuBoard read() throws IOException, ClassNotFoundException {
         SudokuBoard sudokuBoardInstance = null;
 
         try (FileInputStream fileIn = new FileInputStream(absolutePath);
@@ -35,7 +36,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoardInstance) throws Throwable {
+    public void write(SudokuBoard sudokuBoardInstance) throws IOException {
 
         try (FileOutputStream fileOut = new FileOutputStream(absolutePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
