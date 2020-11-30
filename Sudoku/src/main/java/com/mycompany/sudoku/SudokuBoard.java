@@ -63,8 +63,6 @@ public class SudokuBoard implements Observer, Serializable {
                 board.get(i).get(j).addObserver(this);
             }
         }
-        System.out.println("rozmiar board: " + board.size());
-        System.out.println("rozmiar board.get(0): " + board.get(0).size());
     }
 
     public boolean solveGame() {
