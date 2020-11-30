@@ -1,5 +1,7 @@
 package com.mycompany.sudoku;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Random;
 
@@ -96,5 +98,23 @@ class BacktrackingSudokuSolverTest {
         //printSudoku(instance);
         assertEquals(expResult, result);
 
+    }
+
+    @Test
+    public void testToString() {
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+        assertEquals(solver1.toString(), solver2.toString());
+    }
+
+    @Test
+    public void testEquals() {
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+
+        assertFalse(solver1.equals(null));
+        assertTrue(solver1.equals(solver1));
+        assertTrue(solver1.equals(solver2));
+        assertFalse(solver1.equals(new SudokuBoard(solver1,false)));
     }
 }

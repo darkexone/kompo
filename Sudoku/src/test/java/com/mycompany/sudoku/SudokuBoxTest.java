@@ -70,7 +70,10 @@ class SudokuBoxTest {
         }
         SudokuBox box1 = new SudokuBox(field1);
         SudokuBox box2 = new SudokuBox(field2);
+        SudokuBox box3 = new SudokuBox(field2);
         assertNotEquals(box1.hashCode(), box2.hashCode());
+        assertEquals(box2.hashCode(), box3.hashCode());
+        assertTrue(box2.equals(box3));
     }
 
     @org.junit.jupiter.api.Test
@@ -103,12 +106,15 @@ class SudokuBoxTest {
         }
         SudokuBox box1 = new SudokuBox(field1);
         SudokuBox box2 = new SudokuBox(field2);
+        SudokuBox box3 = new SudokuBox(field2);
         SudokuColumn column1 = new SudokuColumn(field1);
 
         assertFalse(box1.equals(null));
         assertTrue(box1.equals(box1));
         assertFalse(box1.equals(box2));
         assertFalse(box1.equals(column1));
+        assertEquals(box2.hashCode(), box3.hashCode());
+        assertTrue(box2.equals(box3));
     }
 
 }

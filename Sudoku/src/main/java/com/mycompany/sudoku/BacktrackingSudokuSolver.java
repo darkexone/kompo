@@ -1,6 +1,9 @@
 package com.mycompany.sudoku;
 
-public class BacktrackingSudokuSolver implements SudokuSolver {
+import java.io.Serializable;
+import org.junit.platform.commons.util.ToStringBuilder;
+
+public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
 
     private boolean check(int row, int column, int i, SudokuBoard board) {
 
@@ -52,5 +55,28 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
     }
     return true;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                //.append("SudokuSolver", this.getClass())
+                .toString();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -117,11 +117,13 @@ public class SudokuRowTest {
         }
         SudokuRow row1 = new SudokuRow(field1);
         SudokuRow row2 = new SudokuRow(field2);
+        SudokuRow row3 = new SudokuRow(field2);
         SudokuColumn column1 = new SudokuColumn(field1);
 
         assertFalse(row1.equals(null));
         assertTrue(row1.equals(row1));
         assertFalse(row1.equals(row2));
         assertFalse(row1.equals(column1));
+        assertTrue(row2.equals(row3));
     }
 }

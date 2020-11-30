@@ -1,11 +1,12 @@
 package com.mycompany.sudoku;
 
+import java.io.Serializable;
 import java.util.Observable;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
-public class SudokuField extends Observable {
+public class SudokuField extends Observable implements Serializable {
 
     private int value;
 
@@ -48,7 +49,6 @@ public class SudokuField extends Observable {
 
         SudokuField rhs = (SudokuField) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(value, rhs.value)
                 .isEquals();
     }

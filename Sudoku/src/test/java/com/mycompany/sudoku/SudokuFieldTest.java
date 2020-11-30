@@ -73,20 +73,22 @@ public class SudokuFieldTest {
     public void testEquals() {
         SudokuField field1 = new SudokuField();
         SudokuField field2 = new SudokuField();
+        SudokuField field3 = new SudokuField();
         field1.setFieldValue(0);
         field2.setFieldValue(9);
+        field3.setFieldValue(9);
 
         SudokuField [] fieldArray1 = new SudokuField[9];
-
         for (int i = 0; i < 9; i++) {
             fieldArray1[i] = new SudokuField();
             fieldArray1[i].setFieldValue(i);
         }
-
         SudokuColumn column1 = new SudokuColumn(fieldArray1);
+
         assertFalse(field1.equals(null));
         assertTrue(field1.equals(field1));
         assertFalse(field1.equals(field2));
         assertFalse(field1.equals(column1));
+        assertTrue(field2.equals(field3));
     }
 }

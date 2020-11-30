@@ -73,7 +73,6 @@ public class SudokuRow {
 
         SudokuRow rhs = (SudokuRow) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(row, rhs.row)
                 .isEquals();
     }

@@ -73,7 +73,6 @@ public class SudokuColumn {
 
         SudokuColumn rhs = (SudokuColumn) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(column, rhs.column)
                 .isEquals();
     }
