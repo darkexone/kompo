@@ -115,11 +115,13 @@ public class SudokuColumnTest {
         }
         SudokuColumn column1 = new SudokuColumn(field1);
         SudokuColumn column2 = new SudokuColumn(field2);
+        SudokuColumn column3 = new SudokuColumn(field2);
         SudokuBox box1 = new SudokuBox(field1);
 
         assertFalse(column1.equals(null));
         assertTrue(column1.equals(column1));
         assertFalse(column1.equals(column2));
         assertFalse(column1.equals(box1));
+        assertTrue(column2.equals(column3));
     }
 }

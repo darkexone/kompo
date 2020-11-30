@@ -452,7 +452,10 @@ Random random = new Random();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
         SudokuBoard board1 = new SudokuBoard(solver1,false);
         SudokuBoard board2 = new SudokuBoard(solver2,false);
+        SudokuBoard board3 = new SudokuBoard(solver2,false);
         assertNotEquals(board1.hashCode(), board2.hashCode());
+        assertEquals(board2.hashCode(), board3.hashCode());
+        assertTrue(board2.equals(board3));
     }
 
     @org.junit.jupiter.api.Test
@@ -461,6 +464,8 @@ Random random = new Random();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
         SudokuBoard board1 = new SudokuBoard(solver1,false);
         SudokuBoard board2 = new SudokuBoard(solver2,false);
+        assertEquals(board1.toString(), board2.toString());
+        board1.set(1,1,1);
         assertNotEquals(board1.toString(), board2.toString());
     }
 
@@ -470,9 +475,15 @@ Random random = new Random();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
         SudokuBoard board1 = new SudokuBoard(solver1,false);
         SudokuBoard board2 = new SudokuBoard(solver2,false);
+        SudokuBoard board3 = new SudokuBoard(solver2,false);
+        board1.set(1,1,1);
+
         assertFalse(board1.equals(null));
         assertFalse(board1.equals(board1.getColumn(1)));
         assertTrue(board1.equals(board1));
         assertFalse(board1.equals(board2));
+        assertTrue(board2.equals(board3));
+        board2.set(1,1,1);
+        assertFalse(board2.equals(board3));
     }
 }
