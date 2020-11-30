@@ -32,7 +32,7 @@ public class SudokuBoard implements Observer, Serializable {
 
     public boolean isUpdate = false;
     
-    public boolean mode;
+    public boolean verbose;
 
     public boolean isCheckBoardTrue() {
         return checkBoard();
@@ -41,7 +41,7 @@ public class SudokuBoard implements Observer, Serializable {
     private SudokuSolver solver;
 
     public void update(Observable obj, Object arg) {
-        if (this.mode) {
+        if (this.verbose) {
         if (this.checkBoard() == false) {
             System.out.println("Blad przy zmianie");
             isUpdate = true;
@@ -51,9 +51,9 @@ public class SudokuBoard implements Observer, Serializable {
 
     // private ArrayList<ArrayList<SudokuField>> board = new ArrayList<>(9);
 
-    public SudokuBoard(SudokuSolver sudokuSolver, boolean mode) {
+    public SudokuBoard(SudokuSolver sudokuSolver, boolean verbose) {
         solver = sudokuSolver;
-        this.mode = mode;
+        this.verbose = verbose;
 
 
         for (int i = 0; i < 9; i++) {
