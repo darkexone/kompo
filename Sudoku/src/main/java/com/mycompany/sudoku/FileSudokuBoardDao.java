@@ -47,7 +47,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void finalize() throws Throwable {
+    public void finalize() throws Exception {
         new FileInputStream(absolutePath).close();
     }
 
