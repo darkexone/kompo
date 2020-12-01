@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
-public class FileSudokuBoardDao implements Dao<SudokuBoard> {
+public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String filename;
     private String absolutePath;
@@ -49,6 +49,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     @Override
     public void finalize() throws Exception {
         new FileInputStream(absolutePath).close();
+        this.close();
     }
 
     @Override
@@ -85,5 +86,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
                 .append(filename)
                 .append(absolutePath)
                 .toHashCode();
+    }
+
+    @Override
+    public void close() {
+        //zasoby sa zamykane w instrukcjach try-with-resources
     }
 }
