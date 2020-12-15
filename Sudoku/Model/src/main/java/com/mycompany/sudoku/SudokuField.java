@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
-public class SudokuField extends Observable implements Serializable {
+public class SudokuField extends Observable implements Serializable, Cloneable {
 
     private int value;
 
@@ -59,4 +59,12 @@ public class SudokuField extends Observable implements Serializable {
                 .append(value)
                 .toHashCode();
     }
+
+    @Override
+    protected SudokuField clone() {
+        SudokuField fieldClone = new SudokuField();
+        fieldClone.setFieldValue(value);
+        return fieldClone;
+    }
+
 }
