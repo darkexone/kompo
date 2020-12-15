@@ -17,7 +17,7 @@ import org.junit.platform.commons.util.ToStringBuilder;
 //import static java.util.Arrays.asList;
 
 
-public class SudokuBoard implements Observer, Serializable {
+public class SudokuBoard implements Observer, Serializable, Cloneable {
     
     Random random = new Random();
 
@@ -192,6 +192,19 @@ public class SudokuBoard implements Observer, Serializable {
                 .append(solver)
                 .append(board)
                 .toHashCode();
+    }
+
+    @Override
+    protected SudokuBoard clone() {
+        SudokuBoard clone = new SudokuBoard(solver, verbose);
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                clone.board.get(i).set(j, board.get(i).get(j).clone());
+            }
+        }
+
+        return clone;
     }
 
 }
