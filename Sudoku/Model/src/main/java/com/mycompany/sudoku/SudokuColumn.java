@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
-public class SudokuColumn {
+public class SudokuColumn implements Cloneable {
 
     private SudokuField[] column = new SudokuField[9];
 
@@ -83,4 +83,16 @@ public class SudokuColumn {
                 .append(column)
                 .toHashCode();
     }
+
+    @Override
+    protected SudokuColumn clone() {
+        try {
+            return (SudokuColumn) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println(this.getClass().getName()
+                    + " nie implementuje Cloneable...");
+            return null;
+        }
+    }
+
 }
