@@ -1,4 +1,4 @@
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 public interface Dao<T> {
 

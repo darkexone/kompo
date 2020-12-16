@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,15 +13,15 @@ import java.util.Random;
  *
  * @author student
  */
-public class SudokuRowTest {
+public class SudokuColumnTest {
     
-    public SudokuRowTest() {
+    public SudokuColumnTest() {
     }
-
-     Random random = new Random();
+    
+    Random random = new Random();
 
     /**
-     * Test of verify method, of class SudokuRow.
+     * Test of verify method, of class SudokuColumn.
      */
     @Test
     public void testVerify_false() {
@@ -43,9 +43,9 @@ public class SudokuRowTest {
         rzad[rr].setFieldValue(randomOdd);
         rzad[rc].setFieldValue(randomOdd);
 
-        SudokuRow sudokuRow = new SudokuRow(rzad);
+        SudokuColumn sudokuColumn = new SudokuColumn(rzad);
         boolean expResult = false;
-        boolean result = sudokuRow.verify();
+        boolean result = sudokuColumn.verify();
         assertEquals(expResult, result);
     }
     
@@ -61,9 +61,9 @@ public class SudokuRowTest {
             rzad[i].setFieldValue(i+1);
         }
 
-        SudokuRow sudokuRow = new SudokuRow(rzad);
+        SudokuColumn sudokuColumn = new SudokuColumn(rzad);
         boolean expResult = true;
-        boolean result = sudokuRow.verify();
+        boolean result = sudokuColumn.verify();
         assertEquals(expResult, result);
 
     }
@@ -79,9 +79,9 @@ public class SudokuRowTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuRow row1 = new SudokuRow(field1);
-        SudokuRow row2 = new SudokuRow(field2);
-        assertNotEquals(row1.hashCode(), row2.hashCode());
+        SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
+        assertNotEquals(column1.hashCode(), column2.hashCode());
     }
 
     @org.junit.jupiter.api.Test
@@ -91,17 +91,15 @@ public class SudokuRowTest {
         for (int i = 0; i < 9; i++) {
             field1[i] = new SudokuField();
             field2[i] = new SudokuField();
-
-            field1[i].setFieldValue(i);
-            field2[i].setFieldValue(9-i);
         }
-        SudokuRow row1 = new SudokuRow(field1);
-        SudokuRow row2 = new SudokuRow(field1);
+        SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
 
-        assertEquals(row1.toString(), row2.toString());
+        assertEquals(column1.toString(), column2.toString());
+
         field1[0].setFieldValue(2);
-        SudokuRow row3 = new SudokuRow(field2);
-        assertNotEquals(row1.toString(), row3.toString());
+        SudokuColumn column3 = new SudokuColumn(field1);
+        assertNotEquals(column1.toString(), column3.toString());
     }
 
     @org.junit.jupiter.api.Test
@@ -115,15 +113,15 @@ public class SudokuRowTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuRow row1 = new SudokuRow(field1);
-        SudokuRow row2 = new SudokuRow(field2);
-        SudokuRow row3 = new SudokuRow(field2);
         SudokuColumn column1 = new SudokuColumn(field1);
+        SudokuColumn column2 = new SudokuColumn(field2);
+        SudokuColumn column3 = new SudokuColumn(field2);
+        SudokuBox box1 = new SudokuBox(field1);
 
-        assertFalse(row1.equals(null));
-        assertTrue(row1.equals(row1));
-        assertFalse(row1.equals(row2));
-        assertFalse(row1.equals(column1));
-        assertTrue(row2.equals(row3));
+        assertFalse(column1.equals(null));
+        assertTrue(column1.equals(column1));
+        assertFalse(column1.equals(column2));
+        assertFalse(column1.equals(box1));
+        assertTrue(column2.equals(column3));
     }
 }

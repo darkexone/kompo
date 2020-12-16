@@ -1,4 +1,4 @@
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 //import java.lang.reflect.Array;
 //import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 import java.io.File;
 import java.io.FileInputStream;

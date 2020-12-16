@@ -1,4 +1,4 @@
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 import java.io.Serializable;
 import org.junit.platform.commons.util.ToStringBuilder;

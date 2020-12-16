@@ -1,4 +1,4 @@
-package com.mycompany.sudoku;
+package pl.comp.model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,7 +6,6 @@ package com.mycompany.sudoku;
  * and open the template in the editor.
  */
 
-import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Random;
 

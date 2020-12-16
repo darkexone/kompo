@@ -1,19 +1,31 @@
-package com.mycompany.sudoku;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pl.comp.model;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Random;
 
-class SudokuBoxTest {
+/**
+ *
+ * @author student
+ */
+public class SudokuRowTest {
+    
+    public SudokuRowTest() {
+    }
 
-    Random random = new Random();
+     Random random = new Random();
 
-    @org.junit.jupiter.api.Test
+    /**
+     * Test of verify method, of class SudokuRow.
+     */
+    @Test
     public void testVerify_false() {
-
         System.out.println("verify_false");
-
-        //fixedStart(instance);
 
         SudokuField[] rzad = new SudokuField[9];
 
@@ -31,17 +43,16 @@ class SudokuBoxTest {
         rzad[rr].setFieldValue(randomOdd);
         rzad[rc].setFieldValue(randomOdd);
 
-        SudokuBox sudokuBox = new SudokuBox(rzad);
+        SudokuRow sudokuRow = new SudokuRow(rzad);
         boolean expResult = false;
-        boolean result = sudokuBox.verify();
+        boolean result = sudokuRow.verify();
         assertEquals(expResult, result);
-
-        }
-
+    }
+    
     @org.junit.jupiter.api.Test
     public void testVerify_true() {
 
-        System.out.println("verify_true");
+        System.out.println("verify_false");
 
         SudokuField[] rzad = new SudokuField[9];
 
@@ -50,9 +61,9 @@ class SudokuBoxTest {
             rzad[i].setFieldValue(i+1);
         }
 
-        SudokuBox sudokuBox = new SudokuBox(rzad);
+        SudokuRow sudokuRow = new SudokuRow(rzad);
         boolean expResult = true;
-        boolean result = sudokuBox.verify();
+        boolean result = sudokuRow.verify();
         assertEquals(expResult, result);
 
     }
@@ -68,12 +79,9 @@ class SudokuBoxTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuBox box1 = new SudokuBox(field1);
-        SudokuBox box2 = new SudokuBox(field2);
-        SudokuBox box3 = new SudokuBox(field2);
-        assertNotEquals(box1.hashCode(), box2.hashCode());
-        assertEquals(box2.hashCode(), box3.hashCode());
-        assertTrue(box2.equals(box3));
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field2);
+        assertNotEquals(row1.hashCode(), row2.hashCode());
     }
 
     @org.junit.jupiter.api.Test
@@ -83,14 +91,17 @@ class SudokuBoxTest {
         for (int i = 0; i < 9; i++) {
             field1[i] = new SudokuField();
             field2[i] = new SudokuField();
-        }
-        SudokuBox box1 = new SudokuBox(field1);
-        SudokuBox box2 = new SudokuBox(field2);
-        assertEquals(box1.toString(), box2.toString());
 
+            field1[i].setFieldValue(i);
+            field2[i].setFieldValue(9-i);
+        }
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field1);
+
+        assertEquals(row1.toString(), row2.toString());
         field1[0].setFieldValue(2);
-        SudokuBox box3 = new SudokuBox(field1);
-        assertNotEquals(box1.toString(), box3.toString());
+        SudokuRow row3 = new SudokuRow(field2);
+        assertNotEquals(row1.toString(), row3.toString());
     }
 
     @org.junit.jupiter.api.Test
@@ -104,17 +115,15 @@ class SudokuBoxTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuBox box1 = new SudokuBox(field1);
-        SudokuBox box2 = new SudokuBox(field2);
-        SudokuBox box3 = new SudokuBox(field2);
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = new SudokuRow(field2);
+        SudokuRow row3 = new SudokuRow(field2);
         SudokuColumn column1 = new SudokuColumn(field1);
 
-        assertFalse(box1.equals(null));
-        assertTrue(box1.equals(box1));
-        assertFalse(box1.equals(box2));
-        assertFalse(box1.equals(column1));
-        assertEquals(box2.hashCode(), box3.hashCode());
-        assertTrue(box2.equals(box3));
+        assertFalse(row1.equals(null));
+        assertTrue(row1.equals(row1));
+        assertFalse(row1.equals(row2));
+        assertFalse(row1.equals(column1));
+        assertTrue(row2.equals(row3));
     }
-
 }

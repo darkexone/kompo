@@ -1,31 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mycompany.sudoku;
+package pl.comp.model;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Random;
 
-/**
- *
- * @author student
- */
-public class SudokuColumnTest {
-    
-    public SudokuColumnTest() {
-    }
-    
+class SudokuBoxTest {
+
     Random random = new Random();
 
-    /**
-     * Test of verify method, of class SudokuColumn.
-     */
-    @Test
+    @org.junit.jupiter.api.Test
     public void testVerify_false() {
+
         System.out.println("verify_false");
+
+        //fixedStart(instance);
 
         SudokuField[] rzad = new SudokuField[9];
 
@@ -43,16 +31,17 @@ public class SudokuColumnTest {
         rzad[rr].setFieldValue(randomOdd);
         rzad[rc].setFieldValue(randomOdd);
 
-        SudokuColumn sudokuColumn = new SudokuColumn(rzad);
+        SudokuBox sudokuBox = new SudokuBox(rzad);
         boolean expResult = false;
-        boolean result = sudokuColumn.verify();
+        boolean result = sudokuBox.verify();
         assertEquals(expResult, result);
-    }
-    
+
+        }
+
     @org.junit.jupiter.api.Test
     public void testVerify_true() {
 
-        System.out.println("verify_false");
+        System.out.println("verify_true");
 
         SudokuField[] rzad = new SudokuField[9];
 
@@ -61,9 +50,9 @@ public class SudokuColumnTest {
             rzad[i].setFieldValue(i+1);
         }
 
-        SudokuColumn sudokuColumn = new SudokuColumn(rzad);
+        SudokuBox sudokuBox = new SudokuBox(rzad);
         boolean expResult = true;
-        boolean result = sudokuColumn.verify();
+        boolean result = sudokuBox.verify();
         assertEquals(expResult, result);
 
     }
@@ -79,9 +68,12 @@ public class SudokuColumnTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuColumn column1 = new SudokuColumn(field1);
-        SudokuColumn column2 = new SudokuColumn(field2);
-        assertNotEquals(column1.hashCode(), column2.hashCode());
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        SudokuBox box3 = new SudokuBox(field2);
+        assertNotEquals(box1.hashCode(), box2.hashCode());
+        assertEquals(box2.hashCode(), box3.hashCode());
+        assertTrue(box2.equals(box3));
     }
 
     @org.junit.jupiter.api.Test
@@ -92,14 +84,13 @@ public class SudokuColumnTest {
             field1[i] = new SudokuField();
             field2[i] = new SudokuField();
         }
-        SudokuColumn column1 = new SudokuColumn(field1);
-        SudokuColumn column2 = new SudokuColumn(field2);
-
-        assertEquals(column1.toString(), column2.toString());
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        assertEquals(box1.toString(), box2.toString());
 
         field1[0].setFieldValue(2);
-        SudokuColumn column3 = new SudokuColumn(field1);
-        assertNotEquals(column1.toString(), column3.toString());
+        SudokuBox box3 = new SudokuBox(field1);
+        assertNotEquals(box1.toString(), box3.toString());
     }
 
     @org.junit.jupiter.api.Test
@@ -113,15 +104,17 @@ public class SudokuColumnTest {
             field1[i].setFieldValue(i);
             field2[i].setFieldValue(9-i);
         }
-        SudokuColumn column1 = new SudokuColumn(field1);
-        SudokuColumn column2 = new SudokuColumn(field2);
-        SudokuColumn column3 = new SudokuColumn(field2);
         SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = new SudokuBox(field2);
+        SudokuBox box3 = new SudokuBox(field2);
+        SudokuColumn column1 = new SudokuColumn(field1);
 
-        assertFalse(column1.equals(null));
-        assertTrue(column1.equals(column1));
-        assertFalse(column1.equals(column2));
-        assertFalse(column1.equals(box1));
-        assertTrue(column2.equals(column3));
+        assertFalse(box1.equals(null));
+        assertTrue(box1.equals(box1));
+        assertFalse(box1.equals(box2));
+        assertFalse(box1.equals(column1));
+        assertEquals(box2.hashCode(), box3.hashCode());
+        assertTrue(box2.equals(box3));
     }
+
 }
