@@ -102,4 +102,20 @@ public class SudokuFieldTest {
         field1.setFieldValue(4);
         assertFalse(field1.equals(field2));
     }
+
+    @org.junit.jupiter.api.Test
+    public void testCompareTo() {
+        SudokuField field1 = new SudokuField();
+        SudokuField field2 = new SudokuField();
+
+        field1.setFieldValue(5);
+        field2.setFieldValue(5);
+        assertEquals(0,field1.compareTo(field2));
+
+        field2.setFieldValue(4);
+        assertEquals(1,field1.compareTo(field2));
+
+        field2.setFieldValue(7);
+        assertEquals(-1,field1.compareTo(field2));
+    }
 }
