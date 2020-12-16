@@ -485,4 +485,15 @@ Random random = new Random();
         board2.set(1,1,1);
         assertFalse(board2.equals(board3));
     }
+
+    @org.junit.jupiter.api.Test
+    public void testClone(){
+        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
+        SudokuBoard board1 = new SudokuBoard(solver1,false);
+        SudokuBoard board2 = board1.clone();
+
+        assertTrue(board1.equals(board2));
+        board1.set(0,0,1);
+        assertFalse(board1.equals(board2));
+    }
 }

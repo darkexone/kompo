@@ -126,4 +126,24 @@ public class SudokuRowTest {
         assertFalse(row1.equals(column1));
         assertTrue(row2.equals(row3));
     }
+
+    @org.junit.jupiter.api.Test
+    public void testClone() throws CloneNotSupportedException {
+        SudokuField [] field1 = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field1[i].setFieldValue(i);
+        }
+
+        SudokuRow row1 = new SudokuRow(field1);
+        SudokuRow row2 = row1.clone();
+        assertTrue(row1.equals(row2));
+
+        for (int i = 0; i < 9; i++) {
+            field1[i].setFieldValue(9-i);
+        }
+        row1 = new SudokuRow(field1);
+        assertFalse(row1.equals(row2));
+    }
 }

@@ -85,14 +85,8 @@ public class SudokuRow implements Cloneable {
     }
 
     @Override
-    protected SudokuRow clone() {
-        try {
-            return (SudokuRow) super.clone();
-        } catch (CloneNotSupportedException e) {
-            System.out.println(this.getClass().getName()
-                    + " nie implementuje Cloneable...");
-            return null;
-        }
+    protected SudokuRow clone() throws CloneNotSupportedException {
+        return (SudokuRow) super.clone();
     }
 
 }

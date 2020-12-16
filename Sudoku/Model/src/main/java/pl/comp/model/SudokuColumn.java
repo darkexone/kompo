@@ -85,14 +85,9 @@ public class SudokuColumn implements Cloneable {
     }
 
     @Override
-    protected SudokuColumn clone() {
-        try {
-            return (SudokuColumn) super.clone();
-        } catch (CloneNotSupportedException e) {
-            System.out.println(this.getClass().getName()
-                    + " nie implementuje Cloneable...");
-            return null;
-        }
+    protected SudokuColumn clone() throws CloneNotSupportedException {
+        return (SudokuColumn) super.clone();
+
     }
 
 }

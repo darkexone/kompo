@@ -117,4 +117,23 @@ class SudokuBoxTest {
         assertTrue(box2.equals(box3));
     }
 
+    @org.junit.jupiter.api.Test
+    public void testClone() throws CloneNotSupportedException {
+        SudokuField [] field1 = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field1[i].setFieldValue(i);
+        }
+
+        SudokuBox box1 = new SudokuBox(field1);
+        SudokuBox box2 = box1.clone();
+        assertTrue(box1.equals(box2));
+
+        for (int i = 0; i < 9; i++) {
+            field1[i].setFieldValue(9-i);
+        }
+        box1 = new SudokuBox(field1);
+        assertFalse(box1.equals(box2));
+    }
 }

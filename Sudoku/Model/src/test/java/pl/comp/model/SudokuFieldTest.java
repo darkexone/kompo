@@ -91,4 +91,15 @@ public class SudokuFieldTest {
         assertFalse(field1.equals(column1));
         assertTrue(field2.equals(field3));
     }
+
+    @org.junit.jupiter.api.Test
+    public void testClone() {
+        SudokuField field1 = new SudokuField();
+        field1.setFieldValue(3);
+        SudokuField field2 = field1.clone();
+        assertTrue(field1.equals(field2));
+
+        field1.setFieldValue(4);
+        assertFalse(field1.equals(field2));
+    }
 }
