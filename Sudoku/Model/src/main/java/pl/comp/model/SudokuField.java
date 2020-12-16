@@ -6,7 +6,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
-public class SudokuField extends Observable implements Serializable, Cloneable {
+public class SudokuField extends Observable
+        implements Serializable, Cloneable, Comparable<SudokuField> {
 
     private int value;
 
@@ -67,4 +68,14 @@ public class SudokuField extends Observable implements Serializable, Cloneable {
         return fieldClone;
     }
 
+    @Override
+    public int compareTo(SudokuField o) {
+        if (this.getFieldValue() == o.getFieldValue()) {
+            return 0;
+        } else if (this.getFieldValue() > o.getFieldValue()) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 }
