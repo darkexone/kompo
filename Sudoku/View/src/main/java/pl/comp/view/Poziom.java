@@ -29,7 +29,7 @@ public enum Poziom {
                         i--;
                     } else {
                         ((TextField) childrens.get(x)).setText("");
-                        ((TextField) childrens.get(x)).setEditable(false);
+                        ((TextField) childrens.get(x)).setEditable(true);
                     }
                 }
         }
