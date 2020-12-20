@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import org.apache.commons.lang3.math.NumberUtils;
 import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
 
@@ -82,15 +83,7 @@ public class Controller {
         randomStart(sudokuBoard, 9);
         sudokuBoard.solveGame();
 
-        ObservableList<Node> childrens = board.getChildren();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                ((TextField) childrens.get((i * 9) + j))
-                        .setText(Integer.toString(sudokuBoard.get(i, j)));
-                ((TextField) childrens.get((i * 9) + j)).setEditable(false);
-            }
-        }
-
+        fillBoard(sudokuBoard);
         this.setPoziom(this.level).start(board);
     }
 
@@ -103,4 +96,43 @@ public class Controller {
             return Poziom.LATWY;
         }
     }
+
+    private void fillBoard(SudokuBoard sudokuBoard) {
+        ObservableList<Node> childrens = board.getChildren();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                TextField textField = (TextField) childrens.get((i * 9) + j);
+
+                if (sudokuBoard.get(i, j) % 10 == 0) {
+                    textField.setText("");
+                } else {
+                    if (sudokuBoard.get(i, j) > 9) {
+                        textField.setText(Integer.toString(sudokuBoard.get(i, j) - 10));
+                    } else {
+                        textField.setText(Integer.toString(sudokuBoard.get(i, j)));
+                    }
+                }
+                if (sudokuBoard.get(i, j) < 10) {
+                    textField.setEditable(false);
+                } else {
+                    textField.setEditable(true);
+                }
+
+                textField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (NumberUtils.isParsable(newValue) == false) {
+                        textField.setStyle("-fx-text-fill: red;");
+                    } else {
+                        int value = Integer.parseInt(newValue);
+
+                        if (value < 1 || value > 9) {
+                            textField.setStyle("-fx-text-fill: red;");
+                        } else {
+                            //updateSudokuBoard(); TODO
+                        }
+                    }
+                });
+            }
+        }
+    }
+
 }
