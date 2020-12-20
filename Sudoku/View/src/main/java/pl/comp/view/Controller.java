@@ -12,6 +12,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
 import pl.comp.model.SudokuBoardDaoFactory;
+import pl.comp.model.SudokuField;
 
 public class Controller {
     Random random = new Random();
@@ -181,7 +182,33 @@ public class Controller {
                 } else {
                     actualSudokuBoard.set(i, j, Integer.parseInt(textField.getText()));
                 }
-                //checkCorrect(textField, i, j); TODO
+                checkCorrect(textField, i, j);
+            }
+        }
+    }
+
+    private void checkCorrect(TextField textField, int i, int j) {
+        if (actualSudokuBoard.isCheckBoardTrue() == true && textField.isEditable() == true) {
+            textField.setStyle("-fx-text-fill: green;");
+        } else if (actualSudokuBoard.getColumn(i).verify() == false) {
+            checkElement(textField, actualSudokuBoard.getColumn(i)
+                    .getList().toArray(new SudokuField[0]));
+        } else if (actualSudokuBoard.getRow(i).verify() == false) {
+            checkElement(textField, actualSudokuBoard.getRow(i)
+                    .getList().toArray(new SudokuField[0]));
+        } else if (actualSudokuBoard.getBox(i, j).verify() == false) {
+            checkElement(textField, actualSudokuBoard.getBox(i, j)
+                    .getList().toArray(new SudokuField[0]));
+        }
+    }
+
+    private void checkElement(TextField textField, SudokuField [] sudokuFields) {
+        for (int i = 0; i < 9; i++) {
+            if (NumberUtils.isParsable(textField.getText()) == true) {
+                if (sudokuFields[i].getFieldValue() == Integer.parseInt(textField.getText())
+                        && textField.isEditable() == true) {
+                    textField.setStyle("-fx-text-fill: blue;");
+                }
             }
         }
     }
