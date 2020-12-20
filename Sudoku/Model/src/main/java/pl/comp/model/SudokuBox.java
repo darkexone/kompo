@@ -4,6 +4,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.platform.commons.util.ToStringBuilder;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class SudokuBox implements Cloneable {
 
     private final SudokuField[] box = new SudokuField[9];
@@ -89,4 +93,8 @@ public class SudokuBox implements Cloneable {
 
     }
 
+    //TODO czy tak moze byc?
+    public List<SudokuField> getList() {
+        return Collections.unmodifiableList(Arrays.asList(box.clone()));
+    }
 }
