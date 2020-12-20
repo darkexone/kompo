@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import org.apache.commons.lang3.math.NumberUtils;
 import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
+import pl.comp.model.SudokuBoardDaoFactory;
 
 public class Controller {
     Random random = new Random();
@@ -133,6 +134,12 @@ public class Controller {
                 });
             }
         }
+    }
+
+    @FXML
+    public void startFromFile() throws Throwable {
+        SudokuBoard sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+        fillBoard(sudokuBoard);
     }
 
 }
