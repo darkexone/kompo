@@ -17,21 +17,21 @@
          </font>
       </Label>
       <Label prefHeight="16.0" prefWidth="176.0" text="Wybierz poziom trudnosci:" />
-      <MenuButton mnemonicParsing="false" text="wybierz">
+      <MenuButton mnemonicParsing="false" text="%chooseLevel">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryE">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryE" text="Latwy" />
+                  <Label onMouseClicked="#switchToSecondaryE" text="%lvlE" />
                </graphic>
             </MenuItem>
           <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryM">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryM" text="Mniej latwy" />
+                  <Label onMouseClicked="#switchToSecondaryM" text="%lvlM" />
                </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryH">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryH" text="Sredni" />
+                  <Label onMouseClicked="#switchToSecondaryH" text="%lvlH" />
                </graphic>
             </MenuItem>
         </items>

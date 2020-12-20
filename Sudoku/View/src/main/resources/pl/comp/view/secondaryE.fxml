@@ -134,11 +134,11 @@
       </GridPane>
         <ButtonBar translateX="-155">
             <buttons>
-                <Button onAction="#start" text="Rozpocznij nową rozgrywkę"/>
-                <Button onAction="#startFromFile" text="Wczytaj ostatnią rozgrywkę"/>
+                <Button onAction="#start" text="%randomStart"/>
+                <Button onAction="#startFromFile" text="%loadLastSave"/>
             </buttons>
         </ButtonBar>
-        <Button onAction="#saveToFile" text="Zapisz do ostatniej rozgrywki"/>
+        <Button onAction="#saveToFile" text="%saveActualGame"/>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
