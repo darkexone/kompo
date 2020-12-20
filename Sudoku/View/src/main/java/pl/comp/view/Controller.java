@@ -142,4 +142,31 @@ public class Controller {
         fillBoard(sudokuBoard);
     }
 
+    @FXML
+    public void saveToFile() throws Throwable {
+
+        SudokuBoard boardToSave = new SudokuBoard(new BacktrackingSudokuSolver(), false);
+        ObservableList<Node> childrens = board.getChildren();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                TextField textField = (TextField) childrens.get((i * 9) + j);
+
+                if (textField.isEditable() == true) {
+                    if (textField.getText().compareTo("") == 0) {
+                        boardToSave.set(i, j, 10);
+                    } else {
+                        if (NumberUtils.isParsable(textField.getText()) == true) {
+                            boardToSave.set(i, j, 10 + Integer.parseInt(textField.getText()));
+                        } else {
+                            boardToSave.set(i, j, 10);
+                        }
+                    }
+                } else {
+                    boardToSave.set(i, j, Integer.parseInt(textField.getText()));
+                }
+            }
+        }
+        SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+    }
+
 }
