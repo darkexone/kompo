@@ -16,6 +16,7 @@ import pl.comp.model.SudokuBoardDaoFactory;
 public class Controller {
     Random random = new Random();
 
+    private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
 
     @FXML
     GridPane board;
@@ -128,7 +129,7 @@ public class Controller {
                         if (value < 1 || value > 9) {
                             textField.setStyle("-fx-text-fill: red;");
                         } else {
-                            //updateSudokuBoard(); TODO
+                            updateSudokuBoard();
                         }
                     }
                 });
@@ -167,6 +168,22 @@ public class Controller {
             }
         }
         SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+    }
+
+    private void updateSudokuBoard() {
+
+        ObservableList<Node> childrens = board.getChildren();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                TextField textField = (TextField) childrens.get((i * 9) + j);
+                if (textField.getText().compareTo("") == 0) {
+                    actualSudokuBoard.set(i, j, 0);
+                } else {
+                    actualSudokuBoard.set(i, j, Integer.parseInt(textField.getText()));
+                }
+                //checkCorrect(textField, i, j); TODO
+            }
+        }
     }
 
 }
