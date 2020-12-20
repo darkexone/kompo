@@ -20,8 +20,6 @@ public enum Poziom {
         void start(GridPane board) {
             ObservableList<Node> childrens = board.getChildren();
 
-            int liczbaPowtorzen = 0;
-
             for (int i = 0; i < liczba; i++) {
                 Random rand = new Random();
                 int x = rand.nextInt(81);
