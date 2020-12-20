@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ButtonBar?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.comp.view.Controller">
     <children>
         <Label text="Sudoku">
@@ -131,8 +132,13 @@
              <TextField layoutX="290.0" layoutY="296.0" maxHeight="10.0" maxWidth="10.0" minHeight="40.0" minWidth="40.0" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
          </children>
       </GridPane>
-      <Button mnemonicParsing="false" onAction="#start" text="Start" />
-        <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="Switch to Primary View" />
+        <ButtonBar translateX="-155">
+            <buttons>
+                <Button onAction="#start" text="Rozpocznij nową rozgrywkę"/>
+                <Button onAction="#startFromFile" text="Wczytaj ostatnią rozgrywkę"/>
+            </buttons>
+        </ButtonBar>
+        <Button onAction="#saveToFile" text="Zapisz do ostatniej rozgrywki"/>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
