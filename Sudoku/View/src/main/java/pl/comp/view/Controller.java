@@ -9,14 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import pl.comp.model.BacktrackingSudokuSolver;
-import pl.comp.model.SudokuArrayList;
 import pl.comp.model.SudokuBoard;
-import pl.comp.model.SudokuField;
 
 public class Controller {
     Random random = new Random();
 
-    private Poziom poziom;
 
     @FXML
     GridPane board;
@@ -88,11 +85,9 @@ public class Controller {
         ObservableList<Node> childrens = board.getChildren();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                //if (childrens.get((i * 9) + j) instanceof TextField) {
                 ((TextField) childrens.get((i * 9) + j))
                         .setText(Integer.toString(sudokuBoard.get(i, j)));
-                ((TextField) childrens.get((i * 9) + j)).setEditable(false);//}
-                //}
+                ((TextField) childrens.get((i * 9) + j)).setEditable(false);
             }
         }
 
