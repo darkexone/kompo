@@ -19,6 +19,8 @@ public class Controller {
 
     private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
 
+    private boolean firstStart = true;
+
     @FXML
     GridPane board;
 
@@ -120,22 +122,24 @@ public class Controller {
                 } else {
                     textField.setEditable(true);
                 }
-
-                textField.textProperty().addListener((observable, oldValue, newValue) -> {
-                    if (NumberUtils.isParsable(newValue) == false) {
-                        textField.setStyle("-fx-text-fill: red;");
-                    } else {
-                        int value = Integer.parseInt(newValue);
-
-                        if (value < 1 || value > 9) {
+                if (firstStart == true) {
+                    textField.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (NumberUtils.isParsable(newValue) == false) {
                             textField.setStyle("-fx-text-fill: red;");
                         } else {
-                            updateSudokuBoard();
+                            int value = Integer.parseInt(newValue);
+
+                            if (value < 1 || value > 9) {
+                                textField.setStyle("-fx-text-fill: red;");
+                            } else {
+                                updateSudokuBoard();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
+        firstStart = false;
     }
 
     @FXML
