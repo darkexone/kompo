@@ -5,8 +5,13 @@ import java.util.Random;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.commons.lang3.math.NumberUtils;
 import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
@@ -25,6 +30,8 @@ public class Controller {
 
     @FXML
     GridPane board;
+
+    private Authors authors = new Authors();
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -227,6 +234,17 @@ public class Controller {
     private void switchToSecondaryH() throws IOException {
         this.level = Poziom.TRUDNY;
         App.setRoot("secondary");
+    }
+
+    @FXML
+    private void onActionButtonAuthors() {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text("Student 1: " + authors.getObject("author1") + "\nStudent 2: " + authors.getObject("author2")));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 
 }
