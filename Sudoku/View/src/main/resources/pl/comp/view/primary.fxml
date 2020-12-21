@@ -16,7 +16,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label prefHeight="16.0" prefWidth="176.0" text="Wybierz poziom trudnosci:" />
+      <Label prefHeight="16.0" prefWidth="176.0" text="%selectLevel" />
       <MenuButton mnemonicParsing="false" text="%chooseLevel">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryE">
