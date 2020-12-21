@@ -213,17 +213,20 @@ public class Controller {
 
     @FXML
     private void switchToSecondaryE() throws IOException {
-        App.setRoot("secondaryE");
+        this.level = Poziom.LATWY;
+        App.setRoot("secondary");
     }
 
     @FXML
     private void switchToSecondaryM() throws IOException {
-        App.setRoot("secondaryM");
+        this.level = Poziom.SREDNI;
+        App.setRoot("secondary");
     }
 
     @FXML
     private void switchToSecondaryH() throws IOException {
-        App.setRoot("secondaryH");
+        this.level = Poziom.TRUDNY;
+        App.setRoot("secondary");
     }
 
 }
