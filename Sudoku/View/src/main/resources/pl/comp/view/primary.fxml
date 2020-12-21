@@ -37,6 +37,7 @@
         </items>
       </MenuButton>
        <Button onAction="#onActionButtonAuthors" text="%authorsPopUp"/>
+       <Button onAction="#onActionChangeLanguage" text="%changeLanguage"/>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
