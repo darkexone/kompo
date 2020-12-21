@@ -10,8 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.StackPane?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.comp.view.Controller">
-    <children>
+
         <Label text="Sudoku">
          <font>
             <Font size="25.0" />
@@ -20,7 +22,6 @@
             <Insets top="20.0" />
          </padding>
         </Label>
-        <Label fx:id="level" text="E" visible="false" />
       <GridPane fx:id="board" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -131,10 +132,12 @@
              <TextField layoutX="290.0" layoutY="296.0" maxHeight="10.0" maxWidth="10.0" minHeight="40.0" minWidth="40.0" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
          </children>
       </GridPane>
-      <Button mnemonicParsing="false" onAction="#start" text="Start" />
-        <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="Switch to Primary View" />
-    </children>
+        <StackPane>
+                <Button onAction="#start" text="%randomStart" StackPane.alignment="CENTER_LEFT"/>
+                <Button onAction="#startFromFile" text="%loadLastSave" StackPane.alignment="CENTER_RIGHT"/>
+        </StackPane>
+        <Button onAction="#saveToFile" text="%saveActualGame"/>
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="60.0" right="60.0" top="20.0" />
     </padding>
 </VBox>

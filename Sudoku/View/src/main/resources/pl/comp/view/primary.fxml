@@ -9,33 +9,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.comp.view.PrimaryController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.comp.view.Controller">
    <children>
       <Label text="Sudoku">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label prefHeight="16.0" prefWidth="176.0" text="Wybierz poziom trudnosci:" />
-      <MenuButton mnemonicParsing="false" text="wybierz">
+      <Label prefHeight="16.0" prefWidth="176.0" text="%selectLevel" />
+      <MenuButton mnemonicParsing="false" text="%chooseLevel">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryE">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryE" text="Latwy" />
+                  <Label onMouseClicked="#switchToSecondaryE" text="%lvlE" />
                </graphic>
             </MenuItem>
           <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryM">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryM" text="Mniej latwy" />
+                  <Label onMouseClicked="#switchToSecondaryM" text="%lvlM" />
                </graphic>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#switchToSecondaryH">
                <graphic>
-                  <Label onMouseClicked="#switchToSecondaryH" text="Sredni" />
+                  <Label onMouseClicked="#switchToSecondaryH" text="%lvlH" />
                </graphic>
             </MenuItem>
         </items>
       </MenuButton>
+       <Button onAction="#onActionButtonAuthors" text="%authorsPopUp"/>
+       <Button onAction="#onActionChangeLanguage" text="%changeLanguage"/>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
