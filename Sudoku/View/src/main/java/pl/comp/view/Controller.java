@@ -5,7 +5,6 @@ import java.util.Random;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -15,23 +14,22 @@ import pl.comp.model.SudokuBoardDaoFactory;
 import pl.comp.model.SudokuField;
 
 public class Controller {
+
+    private static Poziom level;
+
     Random random = new Random();
 
-    private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
-
     private boolean firstStart = true;
+
+    private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
 
     @FXML
     GridPane board;
 
     @FXML
-    Label level;
-
-    @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
-
 
     private boolean check(int row, int column, int i, SudokuBoard board) {
 
@@ -89,17 +87,7 @@ public class Controller {
         sudokuBoard.solveGame();
 
         fillBoard(sudokuBoard);
-        this.setPoziom(this.level).start(board);
-    }
-
-    public Poziom setPoziom(Label level) {
-        if (level.getText().compareTo("H") == 0) {
-            return Poziom.TRUDNY;
-        } else if (level.getText().compareTo("M") == 0) {
-            return Poziom.SREDNI;
-        } else {
-            return Poziom.LATWY;
-        }
+        level.start(board);
     }
 
     private void fillBoard(SudokuBoard sudokuBoard) {
@@ -186,7 +174,11 @@ public class Controller {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 TextField textField = (TextField) childrens.get((i * 9) + j);
-                checkCorrect(textField, i, j);
+                if (textField.isEditable() == false) {
+                    textField.setStyle("-fx-text-fill: black;");
+                } else {
+                    checkCorrect(textField, i, j);
+                }
             }
         }
     }
@@ -217,6 +209,21 @@ public class Controller {
                 }
             }
         }
+    }
+
+    @FXML
+    private void switchToSecondaryE() throws IOException {
+        App.setRoot("secondaryE");
+    }
+
+    @FXML
+    private void switchToSecondaryM() throws IOException {
+        App.setRoot("secondaryM");
+    }
+
+    @FXML
+    private void switchToSecondaryH() throws IOException {
+        App.setRoot("secondaryH");
     }
 
 }
