@@ -1,6 +1,7 @@
 package pl.comp.view;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -245,6 +246,15 @@ public class Controller {
         Scene dialogScene = new Scene(dialogVbox, 300, 200);
         dialog.setScene(dialogScene);
         dialog.show();
+    }
+
+    @FXML
+    private void onActionChangeLanguage() throws IOException {
+        if (Locale.getDefault().equals(new Locale("pl")) == true) {
+            App.changeLanguage("en", "primary");
+        } else {
+            App.changeLanguage("pl", "primary");
+        }
     }
 
 }
