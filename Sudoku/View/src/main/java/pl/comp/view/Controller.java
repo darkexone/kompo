@@ -122,19 +122,13 @@ public class Controller {
                 } else {
                     textField.setEditable(true);
                 }
+
                 if (firstStart == true) {
                     textField.textProperty().addListener((observable, oldValue, newValue) -> {
-                        if (NumberUtils.isParsable(newValue) == false) {
-                            textField.setStyle("-fx-text-fill: red;");
-                        } else {
-                            int value = Integer.parseInt(newValue);
-
-                            if (value < 1 || value > 9) {
-                                textField.setStyle("-fx-text-fill: red;");
-                            } else {
-                                updateSudokuBoard();
-                            }
+                        if (newValue.length() > 0) {
+                            textField.setText(newValue.substring(newValue.length() - 1));
                         }
+                        updateSudokuBoard();
                     });
                 }
             }
@@ -176,23 +170,31 @@ public class Controller {
     }
 
     private void updateSudokuBoard() {
-
         ObservableList<Node> childrens = board.getChildren();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 TextField textField = (TextField) childrens.get((i * 9) + j);
-                if (textField.getText().compareTo("") == 0) {
+                if (NumberUtils.isParsable(textField.getText()) == false) {
                     actualSudokuBoard.set(i, j, 0);
                 } else {
                     actualSudokuBoard.set(i, j, Integer.parseInt(textField.getText()));
                 }
+            }
+        }
+
+        childrens = board.getChildren();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                TextField textField = (TextField) childrens.get((i * 9) + j);
                 checkCorrect(textField, i, j);
             }
         }
     }
 
     private void checkCorrect(TextField textField, int i, int j) {
-        if (actualSudokuBoard.isCheckBoardTrue() == true && textField.isEditable() == true) {
+        if (NumberUtils.isParsable(textField.getText()) == false) {
+            textField.setStyle("-fx-text-fill: red;");
+        } else if (actualSudokuBoard.isCheckBoardTrue() == true && textField.isEditable() == true) {
             textField.setStyle("-fx-text-fill: green;");
         } else if (actualSudokuBoard.getColumn(i).verify() == false) {
             checkElement(textField, actualSudokuBoard.getColumn(i)
