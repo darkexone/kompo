@@ -1,12 +1,11 @@
 package pl.comp.model;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.junit.platform.commons.util.ToStringBuilder;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.junit.platform.commons.util.ToStringBuilder;
 
 public class SudokuColumn implements Cloneable {
 

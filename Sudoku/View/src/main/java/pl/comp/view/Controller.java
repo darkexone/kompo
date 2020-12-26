@@ -242,7 +242,9 @@ public class Controller {
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("Student 1: " + authors.getObject("author1") + "\nStudent 2: " + authors.getObject("author2")));
+        dialogVbox.getChildren().add(
+                new Text("Student 1: " + authors.getObject("author1")
+                        + "\nStudent 2: " + authors.getObject("author2")));
         Scene dialogScene = new Scene(dialogVbox, 300, 200);
         dialog.setScene(dialogScene);
         dialog.show();

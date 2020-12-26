@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Scene scene;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFxml("primary"), 500, 600);

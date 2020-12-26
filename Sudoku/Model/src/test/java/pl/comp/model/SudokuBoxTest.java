@@ -2,6 +2,7 @@ package pl.comp.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Random;
 
 class SudokuBoxTest {
@@ -135,5 +136,21 @@ class SudokuBoxTest {
         }
         box1 = new SudokuBox(field1);
         assertFalse(box1.equals(box2));
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testGetList() {
+        SudokuField [] field1 = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field1[i].setFieldValue(i);
+        }
+
+        List<SudokuField> BoxList = new SudokuBox(field1).getList();
+
+        for (int i = 0; i < 9; i++) {
+            assertTrue(field1[i].getFieldValue() == BoxList.get(i).getFieldValue());
+        }
     }
 }

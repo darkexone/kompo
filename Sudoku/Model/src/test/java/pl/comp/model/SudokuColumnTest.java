@@ -7,6 +7,8 @@ package pl.comp.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -143,5 +145,21 @@ public class SudokuColumnTest {
         }
         column1 = new SudokuColumn(field1);
         assertFalse(column1.equals(column2));
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testGetList() {
+        SudokuField [] field1 = new SudokuField[9];
+
+        for (int i = 0; i < 9; i++) {
+            field1[i] = new SudokuField();
+            field1[i].setFieldValue(i);
+        }
+
+        List<SudokuField> ColumnList = new SudokuColumn(field1).getList();
+
+        for (int i = 0; i < 9; i++) {
+            assertTrue(field1[i].getFieldValue() == ColumnList.get(i).getFieldValue());
+        }
     }
 }
