@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -31,6 +32,9 @@ public class Controller {
 
     @FXML
     GridPane board;
+
+    @FXML
+    MenuButton menuButton;
 
     private Authors authors = new Authors();
 
@@ -222,18 +226,21 @@ public class Controller {
     @FXML
     private void switchToSecondaryE() throws IOException {
         this.level = Poziom.LATWY;
+        menuButton.hide();
         App.setRoot("secondary");
     }
 
     @FXML
     private void switchToSecondaryM() throws IOException {
         this.level = Poziom.SREDNI;
+        menuButton.hide();
         App.setRoot("secondary");
     }
 
     @FXML
     private void switchToSecondaryH() throws IOException {
         this.level = Poziom.TRUDNY;
+        menuButton.hide();
         App.setRoot("secondary");
     }
 
