@@ -260,9 +260,9 @@ public class Controller {
     @FXML
     private void onActionChangeLanguage() throws IOException {
         if (Locale.getDefault().equals(new Locale("pl")) == true) {
-            App.changeLanguage("en", "primary");
+            App.changeLanguage("en_EN", "primary");
         } else {
-            App.changeLanguage("pl", "primary");
+            App.changeLanguage("pl_PL", "primary");
         }
     }
 
