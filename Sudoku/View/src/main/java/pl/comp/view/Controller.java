@@ -15,12 +15,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
 import pl.comp.model.SudokuBoardDaoFactory;
 import pl.comp.model.SudokuField;
 
 public class Controller {
+
+    private static Logger logger = (Logger) LogManager.getLogger(App.class.getName());
 
     private static Poziom level;
 
@@ -225,6 +229,7 @@ public class Controller {
 
     @FXML
     private void switchToSecondaryE() throws IOException {
+        logger.info("set easy level");
         this.level = Poziom.LATWY;
         menuButton.hide();
         App.setRoot("secondary");
@@ -232,6 +237,7 @@ public class Controller {
 
     @FXML
     private void switchToSecondaryM() throws IOException {
+        logger.info("set medium level");
         this.level = Poziom.SREDNI;
         menuButton.hide();
         App.setRoot("secondary");
@@ -239,6 +245,7 @@ public class Controller {
 
     @FXML
     private void switchToSecondaryH() throws IOException {
+        logger.info("set hard level");
         this.level = Poziom.TRUDNY;
         menuButton.hide();
         App.setRoot("secondary");

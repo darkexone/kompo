@@ -8,20 +8,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 
 public class App extends Application {
 
     private static Scene scene;
 
+    private static Logger logger = (Logger) LogManager.getLogger(App.class.getName());
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFxml("primary"), 500, 600);
+        logger.info("START stage " + stage + " with scene primary");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
+        logger.info(fxml + " element set as root");
         scene.setRoot(loadFxml(fxml));
     }
 
@@ -32,7 +38,7 @@ public class App extends Application {
     }
 
     public static void changeLanguage(String locale, String actualFxml) throws IOException {
-
+        logger.info("change locale to " + locale);
         Locale.setDefault(new Locale(locale));
         loadFxml(actualFxml);
         setRoot(actualFxml);
