@@ -264,7 +264,7 @@ public class Controller {
 
     @FXML
     private void onActionChangeLanguage() throws FormFileException {
-        if (Locale.getDefault().equals(new Locale("pl")) == true) {
+        if (Locale.getDefault().equals(new Locale("pl_PL")) == true) {
             App.changeLanguage("en_EN", "primary");
         } else {
             App.changeLanguage("pl_PL", "primary");
