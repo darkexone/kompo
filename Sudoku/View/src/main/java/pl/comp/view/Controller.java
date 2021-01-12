@@ -21,6 +21,8 @@ import pl.comp.model.BacktrackingSudokuSolver;
 import pl.comp.model.SudokuBoard;
 import pl.comp.model.SudokuBoardDaoFactory;
 import pl.comp.model.SudokuField;
+import pl.comp.model.exceptions.DaoFileException;
+import pl.comp.view.exceptions.FormFileException;
 
 public class Controller {
 
@@ -41,11 +43,6 @@ public class Controller {
     MenuButton menuButton;
 
     private Authors authors = new Authors();
-
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
-    }
 
     private boolean check(int row, int column, int i, SudokuBoard board) {
 
@@ -141,13 +138,14 @@ public class Controller {
     }
 
     @FXML
-    public void startFromFile() throws Throwable {
-        SudokuBoard sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+    public void startFromFile() throws DaoFileException {
+        SudokuBoard sudokuBoard = null;
+        sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
         fillBoard(sudokuBoard);
     }
 
     @FXML
-    public void saveToFile() throws Throwable {
+    public void saveToFile() throws DaoFileException {
 
         SudokuBoard boardToSave = new SudokuBoard(new BacktrackingSudokuSolver(), false);
         ObservableList<Node> childrens = board.getChildren();
@@ -170,7 +168,7 @@ public class Controller {
                 }
             }
         }
-        SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+            SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
     }
 
     private void updateSudokuBoard() {
@@ -228,7 +226,7 @@ public class Controller {
     }
 
     @FXML
-    private void switchToSecondaryE() throws IOException {
+    private void switchToSecondaryE() throws FormFileException {
         logger.info("set easy level");
         this.level = Poziom.LATWY;
         menuButton.hide();
@@ -236,7 +234,7 @@ public class Controller {
     }
 
     @FXML
-    private void switchToSecondaryM() throws IOException {
+    private void switchToSecondaryM() throws FormFileException {
         logger.info("set medium level");
         this.level = Poziom.SREDNI;
         menuButton.hide();
@@ -244,7 +242,7 @@ public class Controller {
     }
 
     @FXML
-    private void switchToSecondaryH() throws IOException {
+    private void switchToSecondaryH() throws FormFileException {
         logger.info("set hard level");
         this.level = Poziom.TRUDNY;
         menuButton.hide();
@@ -265,7 +263,7 @@ public class Controller {
     }
 
     @FXML
-    private void onActionChangeLanguage() throws IOException {
+    private void onActionChangeLanguage() throws FormFileException {
         if (Locale.getDefault().equals(new Locale("pl")) == true) {
             App.changeLanguage("en_EN", "primary");
         } else {

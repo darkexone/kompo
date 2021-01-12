@@ -2,20 +2,25 @@ package pl.comp.model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ResourceBundle;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.junit.platform.commons.util.ToStringBuilder;
+import pl.comp.model.exceptions.DaoFileException;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private static Logger logger = (Logger)
             LogManager.getLogger(FileSudokuBoardDao.class.getName());
+
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("pl.comp.model.bundles.bundle");
 
     private String filename;
     private String absolutePath;
@@ -27,7 +32,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     @Override
-    public SudokuBoard read() throws IOException, ClassNotFoundException {
+    public SudokuBoard read() throws DaoFileException {
         SudokuBoard sudokuBoardInstance = null;
 
         try (FileInputStream fileIn = new FileInputStream(absolutePath);
@@ -35,19 +40,34 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
             sudokuBoardInstance = (SudokuBoard) in.readObject();
             logger.debug("read file: " + absolutePath);
+        } catch (FileNotFoundException e) {
+            throw new DaoFileException(resourceBundle
+                    .getObject("FileNotFoundException").toString(), e);
+        } catch (IOException e) {
+            throw new DaoFileException(resourceBundle
+                    .getObject("IOException").toString(), e);
+        } catch (ClassNotFoundException e) {
+            throw new DaoFileException(resourceBundle
+                    .getObject("ClassNotFoundException").toString(), e);
         }
 
         return sudokuBoardInstance;
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoardInstance) throws IOException {
+    public void write(SudokuBoard sudokuBoardInstance) throws DaoFileException {
 
         try (FileOutputStream fileOut = new FileOutputStream(absolutePath);
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 
             out.writeObject(sudokuBoardInstance);
             logger.debug("write file: " + absolutePath);
+        } catch (FileNotFoundException e) {
+            throw new DaoFileException(resourceBundle
+                    .getObject("FileNotFoundException").toString(), e);
+        } catch (IOException e) {
+            throw new DaoFileException(resourceBundle
+                    .getObject("IOException").toString(), e);
         }
     }
 
