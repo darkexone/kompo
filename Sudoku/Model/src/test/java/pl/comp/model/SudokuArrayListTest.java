@@ -8,7 +8,7 @@ public class SudokuArrayListTest {
 
     @Test
     public void add_true () {
-        System.out.println("add_true");
+        //System.out.println("add_true");
 
         SudokuArrayList<SudokuArrayList<SudokuField>> instance = new SudokuArrayList<>();
 
@@ -21,7 +21,7 @@ public class SudokuArrayListTest {
 
     @Test
     public void add_false () {
-        System.out.println("add_false");
+        //System.out.println("add_false");
 
         SudokuArrayList<SudokuArrayList<SudokuField>> instance = new SudokuArrayList<>();
 

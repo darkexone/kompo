@@ -2,12 +2,14 @@ package pl.comp.model;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.comp.model.exceptions.DaoFileException;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,12 +28,7 @@ public class FileSudokuBoardDaoTest {
                     .forEach(File::delete);
         }
         File file = new File(path);
-        boolean bool = file.mkdir();
-        if(bool) {
-            System.out.println("Directory created successfully");
-        } else {
-            System.out.println("Sorry couldn’t create specified directory");
-        }
+        file.mkdir();
     }
 
     @Test
@@ -81,15 +78,12 @@ public class FileSudokuBoardDaoTest {
         Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + File.separator + pathPrefix + File.separator + fileName));
         new RandomAccessFile(System.getProperty("user.dir") + File.separator + fileName, "rw").getChannel().lock();
 
-        assertThrows(IOException.class,() -> {
+        assertThrows(DaoFileException.class,() -> {
             SudokuBoardDaoFactory.getFileDao(fileName).write(instance1);
         });
 
-        assertThrows(IOException.class,() -> {
-            SudokuBoardDaoFactory.getFileDao(fileName).write(instance1);
-        });
-
-        assertThrows(IOException.class,() -> {
+        Locale.setDefault(new Locale("en_EN"));
+        assertThrows(DaoFileException.class,() -> {
             SudokuBoardDaoFactory.getFileDao(fileName).write(instance1);
         });
     }
@@ -99,13 +93,13 @@ public class FileSudokuBoardDaoTest {
         String fileName = "target" + File.separator + "nonExistingPath" + File.separator + "testFailFileNotFoundException";
         Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + File.separator + pathPrefix + File.separator + fileName));
 
-        assertThrows(FileNotFoundException.class,() -> {
+        assertThrows(DaoFileException.class,() -> {
             SudokuBoardDaoFactory.getFileDao(fileName).read();
         });
 
         BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
         SudokuBoard instance1 = new SudokuBoard(solver1,false);
-        assertThrows(FileNotFoundException.class,() -> {
+        assertThrows(DaoFileException.class,() -> {
             SudokuBoardDaoFactory.getFileDao(fileName).write(instance1);
         });
     }

@@ -76,15 +76,15 @@ Random random = new Random();
        // board.set(0,0,8);
     }
 
-    public void printSudoku(SudokuBoard board) {
-        for (int i = 0;i < 9;i++) {
-            for (int j = 0;j < 9;j++) {
-                System.out.print(board.get(i,j));
-            }
-            System.out.println("");
-        }
-        //System.out.println("kolumny: " + board.board.size() + "\nwiersze: " + board.board.get(0).size());
-    }
+    //public void printSudoku(SudokuBoard board) {
+    //    for (int i = 0;i < 9;i++) {
+    //        for (int j = 0;j < 9;j++) {
+    //            System.out.print(board.get(i,j));
+    //        }
+    //        System.out.println("");
+    //    }
+    //    //System.out.println("kolumny: " + board.board.size() + "\nwiersze: " + board.board.get(0).size());
+    //}
 
 
     /**
@@ -92,14 +92,13 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testSolveGame() {
-        System.out.println("solveGame");
+        //System.out.println("solveGame");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
         boolean expResult = true;
         boolean Result = instance.solveGame();
-
-        printSudoku(instance);
+        //printSudoku(instance);
         assertEquals(expResult, Result);
         
     }
@@ -109,7 +108,7 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testEqualSum() {
-        System.out.println("equalSum");
+        //System.out.println("equalSum");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
@@ -137,7 +136,7 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_row() {
-        System.out.println("check_false_row");
+        //System.out.println("check_false_row");
         int row = 0;
         int column = 0;
         int i = 0;
@@ -157,7 +156,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_Column() {
-        System.out.println("check_false_column");
+        //System.out.println("check_false_column");
         int row = 0;
         int column = 0;
         int i = 0;
@@ -183,7 +182,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     public void testCheckBoard_false_Box() {
-        System.out.println("check_false_box");
+        //System.out.println("check_false_box");
         int row = 0;
         int column = 0;
         int i = 0;
@@ -218,7 +217,7 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testCheckBoard_true() {
-        System.out.println("check_true");
+        //System.out.println("check_true");
         int row = 0;
         int column = 0;
 
@@ -265,7 +264,7 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testGet() {
-        System.out.println("getCell");
+        //System.out.println("getCell");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         randomStart(instance);
@@ -283,7 +282,7 @@ Random random = new Random();
      */
     @org.junit.jupiter.api.Test
     public void testDifference() {
-        System.out.println("difference");
+        //System.out.println("difference");
 
         BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
@@ -312,7 +311,7 @@ Random random = new Random();
 
     @org.junit.jupiter.api.Test
     void testSet() {
-        System.out.println("setCell");
+        //System.out.println("setCell");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         instance.set(6,6,6);
@@ -322,7 +321,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetBox_true() {
-        System.out.println("getBox_true");
+        //System.out.println("getBox_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -337,7 +336,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetBox_false() {
-        System.out.println("getBox_false");
+        //System.out.println("getBox_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -354,7 +353,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetRow_false() {
-        System.out.println("getRow_false");
+        //System.out.println("getRow_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -369,7 +368,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetRow_true() {
-        System.out.println("getRow_true");
+        //System.out.println("getRow_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -383,7 +382,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetColumn_false() {
-        System.out.println("getColumn_false");
+        //System.out.println("getColumn_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -398,7 +397,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     void testGetColumn_true() {
-        System.out.println("getColumn_true");
+        //System.out.println("getColumn_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,false);
         fixedStart(instance);
@@ -412,7 +411,7 @@ Random random = new Random();
     
      @org.junit.jupiter.api.Test
     public void testUpdate_false() {
-        System.out.println("update_false");
+        //System.out.println("update_false");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,true);
         fixedStart(instance);
@@ -430,7 +429,7 @@ Random random = new Random();
     
     @org.junit.jupiter.api.Test
     public void testUpdate_true() {
-        System.out.println("update_true");
+        //System.out.println("update_true");
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(solver,true);
         fixedStart(instance);

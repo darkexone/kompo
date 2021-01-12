@@ -11,6 +11,8 @@ import java.util.Observer;
 import java.util.Random;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.junit.platform.commons.util.ToStringBuilder;
 
 //import static java.util.ArrayList.*;
@@ -20,6 +22,8 @@ import org.junit.platform.commons.util.ToStringBuilder;
 public class SudokuBoard implements Observer, Serializable, Cloneable {
     
     Random random = new Random();
+
+    private static Logger logger = (Logger) LogManager.getLogger(SudokuBoard.class.getName());
 
     //private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
     private SudokuArrayList<SudokuArrayList<SudokuField>> board = new SudokuArrayList<>();
@@ -43,7 +47,7 @@ public class SudokuBoard implements Observer, Serializable, Cloneable {
     public void update(Observable obj, Object arg) {
         if (this.verbose) {
         if (this.checkBoard() == false) {
-            System.out.println("Blad przy zmianie");
+            //System.out.println("Blad przy zmianie");
             isUpdate = true;
         }
        }
@@ -55,6 +59,7 @@ public class SudokuBoard implements Observer, Serializable, Cloneable {
         solver = sudokuSolver;
         this.verbose = verbose;
 
+        logger.info(this + " created");
 
         for (int i = 0; i < 9; i++) {
             board.add(new SudokuArrayList<>());
@@ -99,6 +104,7 @@ public class SudokuBoard implements Observer, Serializable, Cloneable {
     }
 
     public void set(int column, int row, int value) {
+        logger.trace("set " + value + " at " + column + ", " + row);
         board.get(column).get(row).setFieldValue(value);
     }
 
