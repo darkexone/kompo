@@ -22,7 +22,7 @@ public class SudokuFieldTest {
      */
     @Test
     public void testGetFieldValue() {
-        System.out.println("getFieldValue");
+        //System.out.println("getFieldValue");
         SudokuField instance = new SudokuField();
         
         assertEquals(instance.getFieldValue(),0);
@@ -33,7 +33,7 @@ public class SudokuFieldTest {
      */
     @Test
     public void testSetFieldValue() {
-        System.out.println("setFieldValue");
+        //System.out.println("setFieldValue");
         
         SudokuField instance = new SudokuField();
         

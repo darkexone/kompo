@@ -12,7 +12,7 @@ class SudokuBoxTest {
     @org.junit.jupiter.api.Test
     public void testVerify_false() {
 
-        System.out.println("verify_false");
+        //System.out.println("verify_false");
 
         //fixedStart(instance);
 
@@ -42,7 +42,7 @@ class SudokuBoxTest {
     @org.junit.jupiter.api.Test
     public void testVerify_true() {
 
-        System.out.println("verify_true");
+        //System.out.println("verify_true");
 
         SudokuField[] rzad = new SudokuField[9];
 

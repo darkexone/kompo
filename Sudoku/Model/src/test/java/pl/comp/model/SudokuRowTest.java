@@ -27,7 +27,7 @@ public class SudokuRowTest {
      */
     @Test
     public void testVerify_false() {
-        System.out.println("verify_false");
+        //System.out.println("verify_false");
 
         SudokuField[] rzad = new SudokuField[9];
 
@@ -54,7 +54,7 @@ public class SudokuRowTest {
     @org.junit.jupiter.api.Test
     public void testVerify_true() {
 
-        System.out.println("verify_false");
+        //System.out.println("verify_false");
 
         SudokuField[] rzad = new SudokuField[9];
 

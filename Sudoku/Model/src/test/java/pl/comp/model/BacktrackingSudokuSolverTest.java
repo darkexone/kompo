@@ -9,14 +9,14 @@ class BacktrackingSudokuSolverTest {
 
     Random random = new Random();
     
-    public void printSudoku(SudokuBoard board) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(board.get(i, j));
-            }
-            System.out.println("");
-        }
-    }
+    //public void printSudoku(SudokuBoard board) {
+    //    for (int i = 0; i < 9; i++) {
+    //        for (int j = 0; j < 9; j++) {
+    //            System.out.print(board.get(i, j));
+    //        }
+    //        System.out.println("");
+    //    }
+    //}
 
     public void randomStart(SudokuBoard board) {
 
@@ -80,21 +80,21 @@ class BacktrackingSudokuSolverTest {
     public void solve() {
 
 
-        System.out.println("solve");
+        //System.out.println("solve");
         BacktrackingSudokuSolver testSudokuSolver = new BacktrackingSudokuSolver();
         SudokuBoard instance = new SudokuBoard(testSudokuSolver,false);
-        System.out.println("przed rozwiazaniem:");
+        //System.out.println("przed rozwiazaniem:");
         //printSudoku(instance);
         //SudokuField field1 = new SudokuField();
         //System.out.println(field1.getFieldValue());
         //System.out.println(instance.board[0][0].getFieldValue());
         randomStart(instance);
         //fixedStart(instance);
-        System.out.println("po random starcie:");
+        //System.out.println("po random starcie:");
         //printSudoku(instance);
         boolean expResult = true;
         boolean result = testSudokuSolver.solve(instance);
-        System.out.println("po rozwiazaniu:");
+        //System.out.println("po rozwiazaniu:");
         //printSudoku(instance);
         assertEquals(expResult, result);
 
