@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -20,12 +21,14 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private static Logger logger = (Logger)
             LogManager.getLogger(FileSudokuBoardDao.class.getName());
 
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("pl.comp.model.bundles.bundle");
+    ResourceBundle resourceBundle;
 
     private String filename;
     private String absolutePath;
 
     public FileSudokuBoardDao(String filename) {
+        Locale.setDefault(new Locale("pl_PL"));
+        this.resourceBundle = ResourceBundle.getBundle("pl.comp.model.bundles.bundle");
         this.filename = filename;
         this.absolutePath = System.getProperty("user.dir") + File.separator + this.filename;
         // .. + "Serializable" + File.separator + this.filename;

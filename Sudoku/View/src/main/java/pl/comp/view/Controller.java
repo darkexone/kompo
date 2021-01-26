@@ -1,8 +1,10 @@
 package pl.comp.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,10 +20,12 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import pl.comp.model.BacktrackingSudokuSolver;
+import pl.comp.model.JdbcSudokuBoardDao;
 import pl.comp.model.SudokuBoard;
 import pl.comp.model.SudokuBoardDaoFactory;
 import pl.comp.model.SudokuField;
 import pl.comp.model.exceptions.DaoFileException;
+import pl.comp.model.exceptions.DaoJdbcException;
 import pl.comp.view.exceptions.FormFileException;
 
 public class Controller {
@@ -35,12 +39,16 @@ public class Controller {
     private boolean firstStart = true;
 
     private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
+    ResourceBundle exceptionResources = ResourceBundle.getBundle("pl.comp.view.bundles.bundle");
 
     @FXML
     GridPane board;
 
     @FXML
     MenuButton menuButton;
+
+    @FXML
+    TextField boardName;
 
     private Authors authors = new Authors();
 
@@ -138,14 +146,20 @@ public class Controller {
     }
 
     @FXML
-    public void startFromFile() throws DaoFileException {
+    public void startFromFile() throws DaoJdbcException {
         SudokuBoard sudokuBoard = null;
-        sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+        //sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+        try {
+            sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(boardName.getText()).read();
+        } catch (DaoJdbcException e) {
+            throw new DaoJdbcException(exceptionResources
+                    .getObject("SQLReadException").toString(), e);
+        }
         fillBoard(sudokuBoard);
     }
 
     @FXML
-    public void saveToFile() throws DaoFileException {
+    public void saveToFile() throws DaoJdbcException {
 
         SudokuBoard boardToSave = new SudokuBoard(new BacktrackingSudokuSolver(), false);
         ObservableList<Node> childrens = board.getChildren();
@@ -168,7 +182,13 @@ public class Controller {
                 }
             }
         }
-            SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+        //SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+        try (JdbcSudokuBoardDao file2 = new JdbcSudokuBoardDao(boardName.getText())) {
+            file2.write(boardToSave);
+        } catch (DaoJdbcException e) {
+            throw new DaoJdbcException(exceptionResources
+                    .getObject("SQLWriteException").toString(), e);
+        }
     }
 
     private void updateSudokuBoard() {
@@ -265,9 +285,9 @@ public class Controller {
     @FXML
     private void onActionChangeLanguage() throws FormFileException {
         if (Locale.getDefault().equals(new Locale("pl_PL")) == true) {
-            App.changeLanguage("en_EN", "primary");
+            App.changeLanguage("en_en", "primary");
         } else {
-            App.changeLanguage("pl_PL", "primary");
+            App.changeLanguage("pl_pl", "primary");
         }
     }
 

@@ -132,9 +132,10 @@
              <TextField layoutX="290.0" layoutY="296.0" maxHeight="10.0" maxWidth="10.0" minHeight="40.0" minWidth="40.0" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
          </children>
       </GridPane>
+    <TextField fx:id="boardName"></TextField>
         <StackPane>
-                <Button onAction="#start" text="%randomStart" StackPane.alignment="CENTER_LEFT"/>
-                <Button onAction="#startFromFile" text="%loadLastSave" StackPane.alignment="CENTER_RIGHT"/>
+            <Button onAction="#startFromFile" text="%loadLastSave" StackPane.alignment="CENTER_RIGHT"/>
+            <Button onAction="#start" text="%randomStart" StackPane.alignment="CENTER_LEFT"/>
         </StackPane>
         <Button onAction="#saveToFile" text="%saveActualGame"/>
     <padding>

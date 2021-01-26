@@ -24,7 +24,7 @@ public class App extends Application {
     public void start(Stage stage) throws FormFileException {
         logger.info("START stage " + stage + " with scene primary");
         try {
-            scene = new Scene(loadFxml("primary"), 500, 600);
+            scene = new Scene(loadFxml("primary"), 500, 700);
         } catch (IOException e) {
             throw new FormFileException(exceptionResources
                     .getObject("FormFileException").toString(), e);
@@ -69,7 +69,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Locale.setDefault(new Locale("pl_PL"));
+        Locale.setDefault(new Locale("pl_pl"));
         launch();
     }
 
