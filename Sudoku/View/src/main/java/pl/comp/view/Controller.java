@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -38,12 +39,16 @@ public class Controller {
     private boolean firstStart = true;
 
     private SudokuBoard actualSudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver(), false);
+    ResourceBundle exceptionResources = ResourceBundle.getBundle("pl.comp.view.bundles.bundle");
 
     @FXML
     GridPane board;
 
     @FXML
     MenuButton menuButton;
+
+    @FXML
+    TextField boardName;
 
     private Authors authors = new Authors();
 
@@ -141,19 +146,20 @@ public class Controller {
     }
 
     @FXML
-    public void startFromFile() throws DaoFileException {
+    public void startFromFile() throws DaoJdbcException {
         SudokuBoard sudokuBoard = null;
         //sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
         try {
-            sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("file").read();
-        } catch (DaoJdbcException throwables) {
-            throwables.printStackTrace();
+            sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(boardName.getText()).read();
+        } catch (DaoJdbcException e) {
+            throw new DaoJdbcException(exceptionResources
+                    .getObject("SQLReadException").toString(), e);
         }
         fillBoard(sudokuBoard);
     }
 
     @FXML
-    public void saveToFile() throws DaoFileException {
+    public void saveToFile() throws DaoJdbcException {
 
         SudokuBoard boardToSave = new SudokuBoard(new BacktrackingSudokuSolver(), false);
         ObservableList<Node> childrens = board.getChildren();
@@ -177,10 +183,11 @@ public class Controller {
             }
         }
         //SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
-        try (JdbcSudokuBoardDao file2 = new JdbcSudokuBoardDao("file")) {
+        try (JdbcSudokuBoardDao file2 = new JdbcSudokuBoardDao(boardName.getText())) {
             file2.write(boardToSave);
-        } catch (DaoJdbcException throwables) {
-            throwables.printStackTrace();
+        } catch (DaoJdbcException e) {
+            throw new DaoJdbcException(exceptionResources
+                    .getObject("SQLWriteException").toString(), e);
         }
     }
 

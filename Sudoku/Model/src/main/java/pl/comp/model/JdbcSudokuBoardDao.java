@@ -1,5 +1,6 @@
 package pl.comp.model;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +15,9 @@ import pl.comp.model.exceptions.DaoJdbcException;
 public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private static Logger logger = (Logger) LogManager.getLogger(SudokuBoard.class.getName());
 
-    private static final String URL = "jdbc:derby:c:\\Users\\huber\\Desktop\\demo;create=true";
+    //private static final String URL
+    // = "jdbc:derby:" + "c:\\Users\\huber\\Desktop\\demo" + ";create=true";
+    private String url;
 
     private Statement jdbcStatement;
     private String fileName;
@@ -27,8 +30,10 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     public JdbcSudokuBoardDao(String name) throws DaoJdbcException {
 
         this.fileName = name;
+        url = "jdbc:derby:" + System.getProperty("user.dir")
+                + File.separator + "database" + ";create=true";
         try {
-            this.connection = DriverManager.getConnection(URL);
+            this.connection = DriverManager.getConnection(url);
             this.connection.setAutoCommit(false);
         } catch (SQLException e) {
             throw new DaoJdbcException(resourceBundle
@@ -44,7 +49,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             jdbcStatement.execute(
                     "CREATE TABLE SudokuValues(board_id int references SudokuNames (id),"
                             + " fields varchar(162))");
-            logger.debug("table created");
+            logger.debug(resourceBundle
+                    .getObject("SQLCreateSuccess"));
         } catch (SQLException e) {
             logger.warn(resourceBundle.getObject("SQLCreateException").toString());
         }
@@ -82,7 +88,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             preparedStatement.close();
             rs.close();
             stmt.close();
-            logger.info("sql update success");
+            logger.info(resourceBundle
+                    .getObject("SQLUpdateSuccess"));
             return;
         } catch (SQLException e) {
             logger.error(resourceBundle.getObject("SQLUpdateException").toString());
@@ -120,7 +127,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             preparedStatement.executeUpdate();
             connection.commit();
             preparedStatement.close();
-            logger.debug("sql data insertion success");
+            logger.debug(resourceBundle
+                    .getObject("SQLInsertSuccess"));
         } catch (SQLException e) {
             throw new DaoJdbcException(resourceBundle
                     .getObject("SQLInsertException").toString(), e);
@@ -174,9 +182,11 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         try {
             jdbcStatement.close();
             connection.close();
-            logger.info("connection closed successfully");
+            logger.info(resourceBundle
+                    .getObject("SQLCloseSuccess"));
         } catch (SQLException e) {
-            logger.fatal("failed to close connection");
+            logger.fatal(resourceBundle
+                    .getObject("SQLCloseFail"));
         }
     }
 
