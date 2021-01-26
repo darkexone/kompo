@@ -1,6 +1,7 @@
 package pl.comp.view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Random;
 import javafx.collections.ObservableList;
@@ -18,10 +19,12 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import pl.comp.model.BacktrackingSudokuSolver;
+import pl.comp.model.JdbcSudokuBoardDao;
 import pl.comp.model.SudokuBoard;
 import pl.comp.model.SudokuBoardDaoFactory;
 import pl.comp.model.SudokuField;
 import pl.comp.model.exceptions.DaoFileException;
+import pl.comp.model.exceptions.DaoJdbcException;
 import pl.comp.view.exceptions.FormFileException;
 
 public class Controller {
@@ -140,7 +143,12 @@ public class Controller {
     @FXML
     public void startFromFile() throws DaoFileException {
         SudokuBoard sudokuBoard = null;
-        sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+        //sudokuBoard = SudokuBoardDaoFactory.getFileDao("save").read();
+        try {
+            sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("file").read();
+        } catch (DaoJdbcException throwables) {
+            throwables.printStackTrace();
+        }
         fillBoard(sudokuBoard);
     }
 
@@ -168,7 +176,12 @@ public class Controller {
                 }
             }
         }
-            SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+        //SudokuBoardDaoFactory.getFileDao("save").write(boardToSave);
+        try (JdbcSudokuBoardDao file2 = new JdbcSudokuBoardDao("file")) {
+            file2.write(boardToSave);
+        } catch (DaoJdbcException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void updateSudokuBoard() {
@@ -265,9 +278,9 @@ public class Controller {
     @FXML
     private void onActionChangeLanguage() throws FormFileException {
         if (Locale.getDefault().equals(new Locale("pl_PL")) == true) {
-            App.changeLanguage("en_EN", "primary");
+            App.changeLanguage("en_en", "primary");
         } else {
-            App.changeLanguage("pl_PL", "primary");
+            App.changeLanguage("pl_pl", "primary");
         }
     }
 

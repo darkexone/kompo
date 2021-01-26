@@ -69,7 +69,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Locale.setDefault(new Locale("pl_PL"));
+        Locale.setDefault(new Locale("pl_pl"));
         launch();
     }
 

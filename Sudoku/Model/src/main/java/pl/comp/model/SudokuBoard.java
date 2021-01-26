@@ -60,6 +60,7 @@ public class SudokuBoard implements Observer, Serializable, Cloneable {
         this.verbose = verbose;
 
         logger.info(this + " created");
+        logger.debug(this + " created");
 
         for (int i = 0; i < 9; i++) {
             board.add(new SudokuArrayList<>());
